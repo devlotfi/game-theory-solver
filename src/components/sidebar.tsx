@@ -27,7 +27,7 @@ export default function Sidebar() {
       ></div>
       <div
         className={cn(
-          "flex flex-col absolute lg:static z-40 h-[calc(100dvh-4rem)] lg:h-auto ml-[-18rem] min-w-[18rem] bg-background border-r border-divider duration-300",
+          "flex flex-col absolute lg:static z-40 h-[calc(100dvh-4rem)] lg:h-auto ml-[-18rem] min-w-[18rem] bg-content1 border-r border-divider duration-300",
           sidebarOpen && "ml-0"
         )}
       >

@@ -50,6 +50,10 @@ export default {
               DEFAULT: "#131F24",
               foreground: "#E7EFF2",
             },
+            content3: {
+              DEFAULT: "#334b57",
+              foreground: "#E7EFF2",
+            },
             background: {
               DEFAULT: "#131F24",
               foreground: "#E7EFF2",

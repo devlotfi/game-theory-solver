@@ -30,8 +30,8 @@ function RouteComponent() {
 
         <div
           className={cn(
-            "flex flex-1 flex-col overflow-y-auto overflow-x-hidden max-w-[100vw] h-[calc(100dvh-4rem)]",
-            sidebarOpen && "lg:max-w-[calc(100vw-18rem)]"
+            "flex flex-1 flex-col overflow-y-auto overflow-x-hidden max-w-[100dvw] h-[calc(100dvh-4rem)]",
+            sidebarOpen && "lg:max-w-[calc(100dvw-18rem)]"
           )}
         >
           <Outlet></Outlet>
