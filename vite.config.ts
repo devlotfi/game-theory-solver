@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 
 const PYODIDE_EXCLUDE = [
   "!**/*.{md,html}",
@@ -25,7 +26,11 @@ export function viteStaticCopyPyodide() {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [viteStaticCopyPyodide(), react()],
+  plugins: [
+    viteStaticCopyPyodide(),
+    TanStackRouterVite({ target: "react", autoCodeSplitting: true }),
+    react(),
+  ],
   optimizeDeps: { exclude: ["pyodide"] },
   base: "/game-theory-solver/",
   build: {
