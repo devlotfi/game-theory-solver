@@ -1,21 +1,9 @@
-import { faDoorOpen, faGear } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
-import SidebarItem from "./sidebar-item";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { cn } from "@heroui/react";
 import { SolverContext } from "../context/solver-context";
 
 export default function Sidebar() {
-  const navigate = useNavigate();
-  const { location } = useRouterState();
-  const { sidebarOpen, setSidebarOpen } = useContext(SolverContext);
-
-  const sidebarNavigate = (path: string) => {
-    navigate({ to: path });
-    if (!window.matchMedia(`(min-width: 1024px)`).matches) {
-      setSidebarOpen(false);
-    }
-  };
+  const { sidebarOpen } = useContext(SolverContext);
 
   return (
     <>
@@ -31,20 +19,7 @@ export default function Sidebar() {
           sidebarOpen && "ml-0"
         )}
       >
-        <div className="flex flex-col p-[1rem] space-y-3">
-          <SidebarItem
-            title="Access controls"
-            active={location.pathname === "/dashboard/access-controls"}
-            onPress={() => sidebarNavigate("/dashboard")}
-            icon={faDoorOpen}
-          ></SidebarItem>
-          <SidebarItem
-            title="Settings"
-            active={location.pathname === "/dashboard/settings"}
-            onPress={() => sidebarNavigate("/dashboard/settings")}
-            icon={faGear}
-          ></SidebarItem>
-        </div>
+        <div className="flex flex-col p-[1rem] space-y-3"></div>
       </div>
     </>
   );
