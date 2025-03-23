@@ -2,8 +2,8 @@ import { faDoorOpen, faGear } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import SidebarItem from "./sidebar-item";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { SolverContext } from "../context/solver-context";
 import { cn } from "@heroui/react";
+import { SolverContext } from "../context/solver-context";
 
 export default function Sidebar() {
   const navigate = useNavigate();

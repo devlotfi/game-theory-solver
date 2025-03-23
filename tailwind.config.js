@@ -24,10 +24,19 @@ export default {
       themes: {
         light: {
           colors: {
-            divider: "#6A7F8B",
+            divider: "#3f4853",
             foreground: "#2c4271",
+            content1: {
+              DEFAULT: "#FFFFFF",
+              foreground: "#E7EFF2",
+            },
+            content2: {
+              DEFAULT: "#F4F4F4",
+              foreground: "#E7EFF2",
+            },
             background: {
-              foreground: "#2c4271",
+              DEFAULT: "#F4F4F4",
+              foreground: "#E7EFF2",
             },
             default: {
               foreground: "#2c4271",
@@ -43,11 +52,11 @@ export default {
             divider: "#575f69",
             foreground: "#E7EFF2",
             content1: {
-              DEFAULT: "#243740",
+              DEFAULT: "#242F40",
               foreground: "#E7EFF2",
             },
             content2: {
-              DEFAULT: "#131F24",
+              DEFAULT: "#131724",
               foreground: "#E7EFF2",
             },
             content3: {
@@ -55,11 +64,14 @@ export default {
               foreground: "#E7EFF2",
             },
             background: {
-              DEFAULT: "#131F24",
+              DEFAULT: "#131724",
               foreground: "#E7EFF2",
             },
             default: {
-              foreground: "#E7EFF2",
+              DEFAULT: "#4a4b5b",
+              100: "#23262d",
+              200: "#585864",
+              400: "#868698",
             },
             primary: {
               DEFAULT: "#D87E2A",

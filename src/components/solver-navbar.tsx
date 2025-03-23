@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import LogoSVG from "../assets/logo.svg";
 import ThemeSwitcher from "./theme-switcher";
-import { SolverContext } from "../context/solver-context";
 import { Button, cn } from "@heroui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
+import { SolverContext } from "../context/solver-context";
 
 export default function SolverNavbar() {
   const { sidebarOpen, setSidebarOpen } = useContext(SolverContext);

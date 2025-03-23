@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import CalculatorSVG from "../assets/calculator.svg";
+import SolverSVG from "../assets/solver.svg";
 import { Button, Card, CardBody, CardFooter } from "@heroui/react";
 import { CardHeader } from "@heroui/react";
 import Navbar from "../components/navbar";
@@ -18,7 +18,7 @@ function RouteComponent() {
       <div className="flex flex-1 lg:items-center justify-center">
         <div className="flex flex-col lg:flex-row items-center max-w-screen-lg p-[1rem] lg:p-[2rem] gap-[2rem]">
           <img
-            src={CalculatorSVG}
+            src={SolverSVG}
             alt="calculator"
             className=" h-[12em] lg:h-[20rem]"
           />

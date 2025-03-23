@@ -1,10 +1,10 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { useContext } from "react";
-import { SolverContext } from "../../context/solver-context";
 import { cn } from "@heroui/react";
 import Sidebar from "../../components/sidebar";
 import SolverNavbar from "../../components/solver-navbar";
 import SolverProvider from "../../provider/solver-provider";
+import { SolverContext } from "../../context/solver-context";
 
 export const Route = createFileRoute("/solver")({
   component: Providers,
@@ -30,8 +30,8 @@ function RouteComponent() {
 
         <div
           className={cn(
-            "flex flex-1 flex-col overflow-y-auto overflow-x-hidden max-w-[100dvw] h-[calc(100dvh-4rem)]",
-            sidebarOpen && "lg:max-w-[calc(100dvw-18rem)]"
+            "flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-[100dvw] h-[calc(100dvh-4rem)]",
+            sidebarOpen && "lg:w-[calc(100dvw-18rem)]"
           )}
         >
           <Outlet></Outlet>
