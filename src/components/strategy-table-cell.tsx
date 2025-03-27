@@ -97,7 +97,7 @@ export default function StrategyTableCell({
           {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Add strategy ({strategy.name})
+                Edit strategy ({strategy.name})
               </ModalHeader>
               <ModalBody className="p-[1.5rem]">
                 <form
@@ -142,7 +142,7 @@ export default function StrategyTableCell({
               player === Players.PLAYER_1 ? "left-0" : "top-0"
             )}
           >
-            <div className="flex h-[4rem] min-w-[6rem] rounded-md border border-divider justify-center items-center bg-content1 hover:bg-content3 duration-250 transition-background">
+            <div className="flex h-[3rem] px-[0.5rem] text-[11pt] min-w-[6rem] whitespace-nowrap rounded-md border border-divider justify-center items-center bg-content1 hover:bg-content3 duration-250 transition-background">
               {strategy.name}
             </div>
           </td>

@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen.ts";
 import { ThemeProvider } from "./provider/theme-provider.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const hashHistory = createHashHistory();
 
@@ -24,12 +25,16 @@ declare module "@tanstack/react-router" {
   }
 }
 
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HeroUIProvider>
-      <ThemeProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
     </HeroUIProvider>
   </StrictMode>
 );

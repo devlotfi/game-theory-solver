@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as SolverRouteImport } from './routes/solver/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as SolverIndexImport } from './routes/solver/index'
+import { Route as SolverExamplesImport } from './routes/solver/examples'
 
 // Create/Update Routes
 
@@ -35,6 +36,12 @@ const SolverIndexRoute = SolverIndexImport.update({
   getParentRoute: () => SolverRouteRoute,
 } as any)
 
+const SolverExamplesRoute = SolverExamplesImport.update({
+  id: '/examples',
+  path: '/examples',
+  getParentRoute: () => SolverRouteRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -53,6 +60,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolverRouteImport
       parentRoute: typeof rootRoute
     }
+    '/solver/examples': {
+      id: '/solver/examples'
+      path: '/examples'
+      fullPath: '/solver/examples'
+      preLoaderRoute: typeof SolverExamplesImport
+      parentRoute: typeof SolverRouteImport
+    }
     '/solver/': {
       id: '/solver/'
       path: '/'
@@ -66,10 +80,12 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface SolverRouteRouteChildren {
+  SolverExamplesRoute: typeof SolverExamplesRoute
   SolverIndexRoute: typeof SolverIndexRoute
 }
 
 const SolverRouteRouteChildren: SolverRouteRouteChildren = {
+  SolverExamplesRoute: SolverExamplesRoute,
   SolverIndexRoute: SolverIndexRoute,
 }
 
@@ -80,11 +96,13 @@ const SolverRouteRouteWithChildren = SolverRouteRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/solver': typeof SolverRouteRouteWithChildren
+  '/solver/examples': typeof SolverExamplesRoute
   '/solver/': typeof SolverIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/solver/examples': typeof SolverExamplesRoute
   '/solver': typeof SolverIndexRoute
 }
 
@@ -92,15 +110,16 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/solver': typeof SolverRouteRouteWithChildren
+  '/solver/examples': typeof SolverExamplesRoute
   '/solver/': typeof SolverIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/solver' | '/solver/'
+  fullPaths: '/' | '/solver' | '/solver/examples' | '/solver/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/solver'
-  id: '__root__' | '/' | '/solver' | '/solver/'
+  to: '/' | '/solver/examples' | '/solver'
+  id: '__root__' | '/' | '/solver' | '/solver/examples' | '/solver/'
   fileRoutesById: FileRoutesById
 }
 
@@ -134,8 +153,13 @@ export const routeTree = rootRoute
     "/solver": {
       "filePath": "solver/route.tsx",
       "children": [
+        "/solver/examples",
         "/solver/"
       ]
+    },
+    "/solver/examples": {
+      "filePath": "solver/examples.tsx",
+      "parent": "/solver"
     },
     "/solver/": {
       "filePath": "solver/index.tsx",

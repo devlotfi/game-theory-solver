@@ -87,15 +87,10 @@ export default function SolverProvider({ children }: PropsWithChildren) {
     ) as GainsTable;
   };
 
-  const setGainValue = (
-    coords: [number, number],
-    player: Players,
-    value: number
-  ) => {
+  const setGainValue = (coords: [number, number], gains: [number, number]) => {
     const updatedGainTable = cloneGainsTable();
-    updatedGainTable[coords[0]][coords[1]][
-      player === Players.PLAYER_1 ? 0 : 1
-    ] = value;
+    updatedGainTable[coords[0]][coords[1]] = gains;
+
     setGainsTable(updatedGainTable);
   };
 
@@ -130,13 +125,22 @@ export default function SolverProvider({ children }: PropsWithChildren) {
       value={{
         sidebarOpen,
         setSidebarOpen,
+
         player1Name,
         setPlayer1Name,
+
         player2Name,
         setPlayer2Name,
+
         player1Strategies,
+        setPlayer1Strategies,
+
         player2Strategies,
+        setPlayer2Strategies,
+
         gainsTable,
+        setGainsTable,
+
         addStrategy,
         editStrategy,
         removeStrategy,
