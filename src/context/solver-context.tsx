@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { Strategy } from "../types/strategy";
 import { GainsTable } from "../types/gains-table";
+import { ActionPlayload } from "../types/actions";
 
 export interface SolverState {
   sidebarOpen: boolean;
@@ -17,6 +18,8 @@ export interface SolverState {
   highlightedCells: Set<string>;
 
   gainsTable: GainsTable;
+
+  action: ActionPlayload | null;
 }
 
 interface SolverContextType {
@@ -64,6 +67,8 @@ export const solverContextInitialValue: SolverContextType = {
         [0, 0],
       ],
     ],
+
+    action: null,
   },
   setSolverState() {},
 };

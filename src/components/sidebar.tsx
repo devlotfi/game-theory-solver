@@ -1,10 +1,17 @@
 import { PropsWithChildren, useContext } from "react";
-import { Button, cn, Divider } from "@heroui/react";
+import { Button, ButtonProps, cn, Divider } from "@heroui/react";
 import { SolverContext } from "../context/solver-context";
 import { useNavigate } from "@tanstack/react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faWrench } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDownload,
+  faLessThan,
+  faLessThanEqual,
+  faSearch,
+  faWrench,
+} from "@fortawesome/free-solid-svg-icons";
 import { PyodideContext } from "../context/pyodide-context";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 function PlayerUtils({
   children,
@@ -17,6 +24,29 @@ function PlayerUtils({
       </div>
       {children}
     </div>
+  );
+}
+
+function SidebarBtn({
+  icon,
+  children,
+  ...props
+}: {
+  icon: IconProp;
+} & ButtonProps) {
+  return (
+    <Button
+      variant="bordered"
+      startContent={
+        <div className="flex justify-center items-center min-h-[1.7rem] min-w-[1.7rem] bg-primary rounded-full text-primary-foreground">
+          <FontAwesomeIcon icon={icon}></FontAwesomeIcon>
+        </div>
+      }
+      className="justify-start px-[0.4rem] h-[3rem] whitespace-break-spaces text-left"
+      {...props}
+    >
+      {children}
+    </Button>
   );
 }
 
@@ -35,7 +65,7 @@ export default function Sidebar() {
       ></div>
       <div
         className={cn(
-          "flex flex-col absolute overflow-y-auto gap-[1rem] p-[1rem] lg:static z-40 h-[calc(100dvh-4rem)] ml-[-18rem] min-w-[18rem] bg-content1 border-r border-divider duration-300",
+          "flex flex-col absolute overflow-y-auto gap-[1rem] p-[1rem] lg:static z-40 h-[calc(100dvh-4rem)] ml-[-18rem] w-[18rem] bg-content1 border-r border-divider duration-300",
           solverState.sidebarOpen && "ml-0"
         )}
       >
@@ -65,39 +95,36 @@ export default function Sidebar() {
 
         <div className="flex flex-col gap-[2rem] mt-[1rem]">
           <PlayerUtils playerName={solverState.player1Name}>
-            <Button
-              onPress={() => {
-                const strategie_strictement_dominante = pyodide.globals.get(
-                  "strategie_strictement_dominante"
-                );
-                const res = strategie_strictement_dominante(
-                  gainsTable,
-                  0
-                ).toJs();
-
-                console.log(res);
-              }}
-            >
-              lol
-            </Button>
-            <Button
-              onPress={() =>
-                setSolverState({
-                  ...solverState,
-                  highlightedPlayer1Strategies: new Set(["[1,1]"]),
-                })
-              }
-            >
-              lol
-            </Button>
-            <Button>lol</Button>
+            <SidebarBtn icon={faSearch}>
+              Find Strictly Dominant Strategies
+            </SidebarBtn>
+            <SidebarBtn icon={faSearch}>
+              Find Weakly Dominant Strategies
+            </SidebarBtn>
+            <SidebarBtn icon={faLessThan}>
+              Eliminate Strictly Dominated Strategy
+            </SidebarBtn>
+            <SidebarBtn icon={faLessThanEqual}>
+              Eliminate Weakly Dominated Strategy
+            </SidebarBtn>
           </PlayerUtils>
 
           <PlayerUtils playerName={solverState.player2Name}>
-            <Button>lol</Button>
-            <Button>lol</Button>
-            <Button>lol</Button>
+            <SidebarBtn icon={faSearch}>
+              Find Strictly Dominant Strategies
+            </SidebarBtn>
+            <SidebarBtn icon={faSearch}>
+              Find Weakly Dominant Strategies
+            </SidebarBtn>
+            <SidebarBtn icon={faLessThan}>
+              Eliminate Strictly Dominated Strategy
+            </SidebarBtn>
+            <SidebarBtn icon={faLessThanEqual}>
+              Eliminate Weakly Dominated Strategy
+            </SidebarBtn>
           </PlayerUtils>
+
+          <SidebarBtn icon={faSearch}>Find Nash Equilibria</SidebarBtn>
         </div>
       </div>
     </>
