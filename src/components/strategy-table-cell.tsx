@@ -31,7 +31,12 @@ export default function StrategyTableCell({
   strategy,
 }: StrategyTableCellProps) {
   const [open, setOpen] = useState<boolean>(false);
-  const { removeStrategy, editStrategy } = useContext(SolverContext);
+  const {
+    removeStrategy,
+    editStrategy,
+    highlightedPlayer1Strategies,
+    highlightedPlayer2Strategies,
+  } = useContext(SolverContext);
   const {
     isOpen: isOpenDelete,
     onOpen: onOpenDelete,
@@ -142,7 +147,16 @@ export default function StrategyTableCell({
               player === Players.PLAYER_1 ? "left-0" : "top-0"
             )}
           >
-            <div className="flex h-[3rem] px-[0.5rem] text-[11pt] min-w-[6rem] whitespace-nowrap rounded-md border border-divider justify-center items-center bg-content1 hover:bg-content3 duration-250 transition-background">
+            <div
+              className={cn(
+                "flex h-[3rem] px-[0.5rem] text-[11pt] min-w-[6rem] whitespace-nowrap rounded-md border border-divider justify-center items-center bg-content1 hover:bg-content3 duration-250 transition-background",
+                (player === Players.PLAYER_1 &&
+                  highlightedPlayer1Strategies.has(strategy.id)) ||
+                  (player === Players.PLAYER_2 &&
+                    highlightedPlayer2Strategies.has(strategy.id) &&
+                    "bg-[hsl(var(--heroui-primary)/0.5)]")
+              )}
+            >
               {strategy.name}
             </div>
           </td>

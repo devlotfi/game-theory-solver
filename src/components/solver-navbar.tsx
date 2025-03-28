@@ -5,6 +5,7 @@ import { Button, cn } from "@heroui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { SolverContext } from "../context/solver-context";
+import GithubBtn from "./github-btn";
 
 export default function SolverNavbar() {
   const { sidebarOpen, setSidebarOpen } = useContext(SolverContext);
@@ -29,7 +30,8 @@ export default function SolverNavbar() {
         </div>
       </div>
 
-      <div className="flex">
+      <div className="flex gap-[0.5rem]">
+        <GithubBtn></GithubBtn>
         <ThemeSwitcher></ThemeSwitcher>
       </div>
     </div>

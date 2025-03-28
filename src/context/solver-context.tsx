@@ -19,6 +19,15 @@ interface SolverContextType {
   player2Strategies: Strategy[];
   setPlayer2Strategies: (value: Strategy[]) => void;
 
+  highlightedPlayer1Strategies: Set<string>;
+  setHighlightedPlayer1Strategies: (value: Set<string>) => void;
+
+  highlightedPlayer2Strategies: Set<string>;
+  setHighlightedPlayer2Strategies: (value: Set<string>) => void;
+
+  highlightedCells: Set<string>;
+  setHighlightedCells: (value: Set<string>) => void;
+
   gainsTable: GainsTable;
   setGainsTable: (value: GainsTable) => void;
 
@@ -51,6 +60,15 @@ export const solverContextInitialValue: SolverContextType = {
     new Strategy("Strategy 3"),
   ],
   setPlayer2Strategies() {},
+
+  highlightedPlayer1Strategies: new Set(),
+  setHighlightedPlayer1Strategies() {},
+
+  highlightedPlayer2Strategies: new Set(),
+  setHighlightedPlayer2Strategies() {},
+
+  highlightedCells: new Set(["[0,0]"]),
+  setHighlightedCells() {},
 
   gainsTable: [
     [

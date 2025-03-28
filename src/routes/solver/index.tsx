@@ -35,6 +35,7 @@ function RouteComponent() {
             sidebarOpen && "lg:w-[calc(100dvw-18rem)]"
           )}
         >
+          <div className="flex min-h-[5rem]">lol</div>
           <PlayerNamesLayout>
             <table className="border-separate border-spacing-[0.5rem] inline-block m-auto">
               <tbody>

@@ -23,8 +23,13 @@ function PlayerUtils({
 export default function Sidebar() {
   const navigate = useNavigate();
   const { pyodide } = useContext(PyodideContext);
-  const { sidebarOpen, player1Name, player2Name, gainsTable } =
-    useContext(SolverContext);
+  const {
+    sidebarOpen,
+    player1Name,
+    player2Name,
+    gainsTablen,
+    setHighlightedCells,
+  } = useContext(SolverContext);
 
   return (
     <>
@@ -36,11 +41,11 @@ export default function Sidebar() {
       ></div>
       <div
         className={cn(
-          "flex flex-col absolute lg:static z-40 h-[calc(100dvh-4rem)] lg:h-auto ml-[-18rem] min-w-[18rem] bg-content1 border-r border-divider duration-300",
+          "flex flex-col absolute overflow-y-auto gap-[1rem] p-[1rem] lg:static z-40 h-[calc(100dvh-4rem)] ml-[-18rem] min-w-[18rem] bg-content1 border-r border-divider duration-300",
           sidebarOpen && "ml-0"
         )}
       >
-        <div className="flex flex-col p-[1rem] gap-[1rem]">
+        <div className="flex flex-col">
           <Button
             color="primary"
             variant="bordered"
@@ -53,43 +58,45 @@ export default function Sidebar() {
           >
             Load examples
           </Button>
-          <Divider></Divider>
+        </div>
+        <Divider></Divider>
 
-          <div className="flex items-center gap-[1rem]">
-            <FontAwesomeIcon
-              icon={faWrench}
-              className="text-primary text-[15pt]"
-            ></FontAwesomeIcon>
-            <div className="flex text-[15pt] font-black">Utils</div>
-          </div>
+        <div className="flex items-center gap-[1rem]">
+          <FontAwesomeIcon
+            icon={faWrench}
+            className="text-primary text-[15pt]"
+          ></FontAwesomeIcon>
+          <div className="flex text-[15pt] font-black">Utils</div>
+        </div>
 
-          <div className="flex flex-col gap-[2rem] mt-[1rem]">
-            <PlayerUtils playerName={player1Name}>
-              <Button
-                onPress={() => {
-                  const strategie_strictement_dominante = pyodide.globals.get(
-                    "strategie_strictement_dominante"
-                  );
-                  const res = strategie_strictement_dominante(
-                    gainsTable,
-                    0
-                  ).toJs();
+        <div className="flex flex-col gap-[2rem] mt-[1rem]">
+          <PlayerUtils playerName={player1Name}>
+            <Button
+              onPress={() => {
+                const strategie_strictement_dominante = pyodide.globals.get(
+                  "strategie_strictement_dominante"
+                );
+                const res = strategie_strictement_dominante(
+                  gainsTable,
+                  0
+                ).toJs();
 
-                  console.log(res);
-                }}
-              >
-                lol
-              </Button>
-              <Button>lol</Button>
-              <Button>lol</Button>
-            </PlayerUtils>
+                console.log(res);
+              }}
+            >
+              lol
+            </Button>
+            <Button onPress={() => setHighlightedCells(new Set(["[1,1]"]))}>
+              lol
+            </Button>
+            <Button>lol</Button>
+          </PlayerUtils>
 
-            <PlayerUtils playerName={player2Name}>
-              <Button>lol</Button>
-              <Button>lol</Button>
-              <Button>lol</Button>
-            </PlayerUtils>
-          </div>
+          <PlayerUtils playerName={player2Name}>
+            <Button>lol</Button>
+            <Button>lol</Button>
+            <Button>lol</Button>
+          </PlayerUtils>
         </div>
       </div>
     </>

@@ -17,12 +17,26 @@ export default function SolverProvider({ children }: PropsWithChildren) {
   const [player2Name, setPlayer2Name] = useState(
     solverContextInitialValue.player2Name
   );
+
   const [player1Strategies, setPlayer1Strategies] = useState<Strategy[]>(
     solverContextInitialValue.player1Strategies
   );
   const [player2Strategies, setPlayer2Strategies] = useState<Strategy[]>(
     solverContextInitialValue.player2Strategies
   );
+
+  const [highlightedPlayer1Strategies, setHighlightedPlayer1Strategies] =
+    useState<Set<string>>(
+      solverContextInitialValue.highlightedPlayer1Strategies
+    );
+  const [highlightedPlayer2Strategies, setHighlightedPlayer2Strategies] =
+    useState<Set<string>>(
+      solverContextInitialValue.highlightedPlayer2Strategies
+    );
+  const [highlightedCells, setHighlightedCells] = useState<Set<string>>(
+    solverContextInitialValue.highlightedCells
+  );
+
   const [gainsTable, setGainsTable] = useState<GainsTable>(
     solverContextInitialValue.gainsTable
   );
@@ -137,6 +151,15 @@ export default function SolverProvider({ children }: PropsWithChildren) {
 
         player2Strategies,
         setPlayer2Strategies,
+
+        highlightedPlayer1Strategies,
+        setHighlightedPlayer1Strategies,
+
+        highlightedPlayer2Strategies,
+        setHighlightedPlayer2Strategies,
+
+        highlightedCells,
+        setHighlightedCells,
 
         gainsTable,
         setGainsTable,

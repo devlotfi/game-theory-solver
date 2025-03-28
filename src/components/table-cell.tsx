@@ -1,4 +1,10 @@
-import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import {
+  Button,
+  cn,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@heroui/react";
 import { useContext } from "react";
 import { SolverContext } from "../context/solver-context";
 import * as yup from "yup";
@@ -11,7 +17,7 @@ interface TableCellProps {
 }
 
 export default function TableCell({ gains, coords }: TableCellProps) {
-  const { setGainValue } = useContext(SolverContext);
+  const { setGainValue, highlightedCells } = useContext(SolverContext);
 
   const formik = useFormik({
     initialValues: {
@@ -39,7 +45,13 @@ export default function TableCell({ gains, coords }: TableCellProps) {
         }}
       >
         <PopoverTrigger>
-          <div className="flex h-full w-full px-[0.5rem] rounded-md cursor-pointer justify-center items-center bg-background border border-divider hover:bg-content3 duration-250 transition-background">
+          <div
+            className={cn(
+              "flex h-full w-full px-[0.5rem] rounded-md cursor-pointer justify-center items-center bg-background border border-divider hover:bg-content3 duration-250 transition-background",
+              highlightedCells.has(`[${coords[0]},${coords[1]}]`) &&
+                "bg-[hsl(var(--heroui-primary)/0.5)]"
+            )}
+          >
             <div className="flex flex-1 justify-between items-center gap-[0.3rem]">
               <div className="flex text-[15pt] ">(</div>
               <div className="flex text-[15pt] ">{gains[0]}</div>

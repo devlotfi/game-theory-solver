@@ -26,7 +26,7 @@ export default function ThemeSwitcher() {
     <Button
       isIconOnly
       variant="bordered"
-      className="bg-background border border-divider"
+      className="bg-background border-divider text-[15pt]"
       onPress={switchTheme}
     >
       {themeOption === ThemeOptions.LIGHT ? (
