@@ -8,7 +8,7 @@ import { SolverContext } from "../context/solver-context";
 import GithubBtn from "./github-btn";
 
 export default function SolverNavbar() {
-  const { sidebarOpen, setSidebarOpen } = useContext(SolverContext);
+  const { solverState, setSolverState } = useContext(SolverContext);
 
   return (
     <div className="flex h-[4rem] bg-content1 border-b border-divider justify-between items-center px-[1rem]">
@@ -17,11 +17,19 @@ export default function SolverNavbar() {
           isIconOnly
           variant="bordered"
           className="bg-background border border-divider"
-          onPress={() => setSidebarOpen(!sidebarOpen)}
+          onPress={() =>
+            setSolverState({
+              ...solverState,
+              sidebarOpen: !solverState.sidebarOpen,
+            })
+          }
         >
           <FontAwesomeIcon
             icon={faAngleDoubleRight}
-            className={cn("duration-300", sidebarOpen && "rotate-180")}
+            className={cn(
+              "duration-300",
+              solverState.sidebarOpen && "rotate-180"
+            )}
           ></FontAwesomeIcon>
         </Button>
         <img src={LogoSVG} alt="logo" className="h-[2.3rem]" />

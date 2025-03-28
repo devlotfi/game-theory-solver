@@ -1,8 +1,5 @@
-import { Button, Link } from "@heroui/react";
 import LogoSVG from "../assets/logo.svg";
 import ThemeSwitcher from "./theme-switcher";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import GithubBtn from "./github-btn";
 
 export default function Navbar() {

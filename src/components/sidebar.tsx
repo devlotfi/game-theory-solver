@@ -23,26 +23,20 @@ function PlayerUtils({
 export default function Sidebar() {
   const navigate = useNavigate();
   const { pyodide } = useContext(PyodideContext);
-  const {
-    sidebarOpen,
-    player1Name,
-    player2Name,
-    gainsTablen,
-    setHighlightedCells,
-  } = useContext(SolverContext);
+  const { solverState, setSolverState } = useContext(SolverContext);
 
   return (
     <>
       <div
         className={cn(
           "flex lg:hidden fixed h-screen w-screen bg-black opacity-50 z-40",
-          !sidebarOpen && "hidden"
+          !solverState.sidebarOpen && "hidden"
         )}
       ></div>
       <div
         className={cn(
           "flex flex-col absolute overflow-y-auto gap-[1rem] p-[1rem] lg:static z-40 h-[calc(100dvh-4rem)] ml-[-18rem] min-w-[18rem] bg-content1 border-r border-divider duration-300",
-          sidebarOpen && "ml-0"
+          solverState.sidebarOpen && "ml-0"
         )}
       >
         <div className="flex flex-col">
@@ -70,7 +64,7 @@ export default function Sidebar() {
         </div>
 
         <div className="flex flex-col gap-[2rem] mt-[1rem]">
-          <PlayerUtils playerName={player1Name}>
+          <PlayerUtils playerName={solverState.player1Name}>
             <Button
               onPress={() => {
                 const strategie_strictement_dominante = pyodide.globals.get(
@@ -86,13 +80,20 @@ export default function Sidebar() {
             >
               lol
             </Button>
-            <Button onPress={() => setHighlightedCells(new Set(["[1,1]"]))}>
+            <Button
+              onPress={() =>
+                setSolverState({
+                  ...solverState,
+                  highlightedPlayer1Strategies: new Set(["[1,1]"]),
+                })
+              }
+            >
               lol
             </Button>
             <Button>lol</Button>
           </PlayerUtils>
 
-          <PlayerUtils playerName={player2Name}>
+          <PlayerUtils playerName={solverState.player2Name}>
             <Button>lol</Button>
             <Button>lol</Button>
             <Button>lol</Button>

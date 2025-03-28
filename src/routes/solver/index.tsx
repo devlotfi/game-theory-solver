@@ -15,12 +15,11 @@ export const Route = createFileRoute("/solver/")({
 });
 
 function RouteComponent() {
-  const { player1Strategies, player2Strategies, gainsTable, sidebarOpen } =
-    useContext(SolverContext);
+  const { solverState } = useContext(SolverContext);
 
   useEffect(() => {
-    console.log(gainsTable);
-  }, [gainsTable]);
+    console.log(solverState.gainsTable);
+  }, [solverState.gainsTable]);
 
   return (
     <div className="flex flex-col flex-1 bg-content2 relative overflow-x-hidden">
@@ -32,7 +31,7 @@ function RouteComponent() {
         <div
           className={cn(
             "flex flex-1 flex-col overflow-y-auto overflow-x-hidden w-[100dvw] h-[calc(100dvh-4rem)]",
-            sidebarOpen && "lg:w-[calc(100dvw-18rem)]"
+            solverState.sidebarOpen && "lg:w-[calc(100dvw-18rem)]"
           )}
         >
           <div className="flex min-h-[5rem]">lol</div>
@@ -41,7 +40,7 @@ function RouteComponent() {
               <tbody>
                 <tr>
                   <td className="sticky top-0 left-0 z-20 bg-content2"></td>
-                  {player2Strategies.map((strategy) => (
+                  {solverState.player2Strategies.map((strategy) => (
                     <StrategyTableCell
                       key={strategy.id}
                       player={Players.PLAYER_2}
@@ -58,11 +57,11 @@ function RouteComponent() {
                   </td>
                 </tr>
 
-                {gainsTable.map((row, rowIndex) => (
+                {solverState.gainsTable.map((row, rowIndex) => (
                   <tr key={rowIndex}>
                     <StrategyTableCell
                       player={Players.PLAYER_1}
-                      strategy={player1Strategies[rowIndex]}
+                      strategy={solverState.player1Strategies[rowIndex]}
                     ></StrategyTableCell>
 
                     {row.map((gains, columnIndex) => (

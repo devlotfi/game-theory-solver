@@ -30,13 +30,7 @@ function SectionParagraph({ children }: PropsWithChildren) {
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const {
-    setGainsTable,
-    setPlayer1Strategies,
-    setPlayer2Strategies,
-    setPlayer1Name,
-    setPlayer2Name,
-  } = useContext(SolverContext);
+  const { solverState, setSolverState } = useContext(SolverContext);
 
   return (
     <div className="flex flex-col flex-1">
@@ -89,26 +83,29 @@ function RouteComponent() {
                   ></FontAwesomeIcon>
                 }
                 onPress={() => {
-                  setGainsTable([
-                    [
-                      [3, 3],
-                      [0, 5],
+                  setSolverState({
+                    ...solverState,
+                    gainsTable: [
+                      [
+                        [3, 3],
+                        [0, 5],
+                      ],
+                      [
+                        [5, 0],
+                        [1, 1],
+                      ],
                     ],
-                    [
-                      [5, 0],
-                      [1, 1],
+                    player1Strategies: [
+                      new Strategy("Cooperate (Share)"),
+                      new Strategy("Cheat (Download Only)"),
                     ],
-                  ]);
-                  setPlayer1Strategies([
-                    new Strategy("Cooperate (Share)"),
-                    new Strategy("Cheat (Download Only)"),
-                  ]);
-                  setPlayer2Strategies([
-                    new Strategy("Cooperate (Share)"),
-                    new Strategy("Cheat (Download Only)"),
-                  ]);
-                  setPlayer1Name("Player 1");
-                  setPlayer2Name("Player 2");
+                    player2Strategies: [
+                      new Strategy("Cooperate (Share)"),
+                      new Strategy("Cheat (Download Only)"),
+                    ],
+                    player1Name: "Player 1",
+                    player2Name: "Player 2",
+                  });
                   navigate({
                     to: "/solver",
                   });
@@ -184,26 +181,29 @@ function RouteComponent() {
                   ></FontAwesomeIcon>
                 }
                 onPress={() => {
-                  setGainsTable([
-                    [
-                      [3, 3],
-                      [1, 5],
+                  setSolverState({
+                    ...solverState,
+                    gainsTable: [
+                      [
+                        [3, 3],
+                        [1, 5],
+                      ],
+                      [
+                        [5, 1],
+                        [0, 0],
+                      ],
                     ],
-                    [
-                      [5, 1],
-                      [0, 0],
+                    player1Strategies: [
+                      new Strategy("Peaceful (Dove)"),
+                      new Strategy("Aggressive (Hawk)"),
                     ],
-                  ]);
-                  setPlayer1Strategies([
-                    new Strategy("Peaceful (Dove)"),
-                    new Strategy("Aggressive (Hawk)"),
-                  ]);
-                  setPlayer2Strategies([
-                    new Strategy("Peaceful (Dove)"),
-                    new Strategy("Aggressive (Hawk)"),
-                  ]);
-                  setPlayer1Name("Player 1");
-                  setPlayer2Name("Player 2");
+                    player2Strategies: [
+                      new Strategy("Peaceful (Dove)"),
+                      new Strategy("Aggressive (Hawk)"),
+                    ],
+                    player1Name: "Player 1",
+                    player2Name: "Player 2",
+                  });
                   navigate({
                     to: "/solver",
                   });
@@ -280,26 +280,29 @@ function RouteComponent() {
                   ></FontAwesomeIcon>
                 }
                 onPress={() => {
-                  setGainsTable([
-                    [
-                      [3, 3],
-                      [0, 5],
+                  setSolverState({
+                    ...solverState,
+                    gainsTable: [
+                      [
+                        [3, 3],
+                        [0, 5],
+                      ],
+                      [
+                        [5, 0],
+                        [1, 1],
+                      ],
                     ],
-                    [
-                      [5, 0],
-                      [1, 1],
+                    player1Strategies: [
+                      new Strategy("Ignore"),
+                      new Strategy("Invest in Security"),
                     ],
-                  ]);
-                  setPlayer1Strategies([
-                    new Strategy("Ignore"),
-                    new Strategy("Invest in Security"),
-                  ]);
-                  setPlayer2Strategies([
-                    new Strategy("Simple Attack"),
-                    new Strategy("Sophisticated Attack"),
-                  ]);
-                  setPlayer1Name("Defender");
-                  setPlayer2Name("Attacker");
+                    player2Strategies: [
+                      new Strategy("Simple Attack"),
+                      new Strategy("Sophisticated Attack"),
+                    ],
+                    player1Name: "Defender",
+                    player2Name: "Attacker",
+                  });
                   navigate({
                     to: "/solver",
                   });
@@ -375,26 +378,29 @@ function RouteComponent() {
                   ></FontAwesomeIcon>
                 }
                 onPress={() => {
-                  setGainsTable([
-                    [
-                      [2, 2],
-                      [3, 1],
+                  setSolverState({
+                    ...solverState,
+                    gainsTable: [
+                      [
+                        [2, 2],
+                        [3, 1],
+                      ],
+                      [
+                        [1, 3],
+                        [1, 1],
+                      ],
                     ],
-                    [
-                      [1, 3],
-                      [1, 1],
+                    player1Strategies: [
+                      new Strategy("Choose A"),
+                      new Strategy("Choose B"),
                     ],
-                  ]);
-                  setPlayer1Strategies([
-                    new Strategy("Choose A"),
-                    new Strategy("Choose B"),
-                  ]);
-                  setPlayer2Strategies([
-                    new Strategy("Choose Route A"),
-                    new Strategy("Choose Route B"),
-                  ]);
-                  setPlayer1Name("Player 1");
-                  setPlayer2Name("Player 2");
+                    player2Strategies: [
+                      new Strategy("Choose Route A"),
+                      new Strategy("Choose Route B"),
+                    ],
+                    player1Name: "Player 1",
+                    player2Name: "Player 2",
+                  });
                   navigate({
                     to: "/solver",
                   });

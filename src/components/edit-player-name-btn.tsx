@@ -20,22 +20,30 @@ interface Props {
 }
 
 export default function EditPlayerNameBtn({ player }: Props) {
-  const { player1Name, player2Name, setPlayer1Name, setPlayer2Name } =
-    useContext(SolverContext);
+  const { solverState, setSolverState } = useContext(SolverContext);
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   const formik = useFormik({
     initialValues: {
-      playerName: player === Players.PLAYER_1 ? player1Name : player2Name,
+      playerName:
+        player === Players.PLAYER_1
+          ? solverState.player1Name
+          : solverState.player2Name,
     },
     validationSchema: yup.object({
       playerName: yup.string().min(1).max(64).required(),
     }),
     onSubmit(values) {
       if (player === Players.PLAYER_1) {
-        setPlayer1Name(values.playerName);
+        setSolverState({
+          ...solverState,
+          player1Name: values.playerName,
+        });
       } else if (player === Players.PLAYER_2) {
-        setPlayer2Name(values.playerName);
+        setSolverState({
+          ...solverState,
+          player2Name: values.playerName,
+        });
       }
       onClose();
     },
@@ -59,7 +67,10 @@ export default function EditPlayerNameBtn({ player }: Props) {
             <>
               <ModalHeader className="flex flex-col gap-1">
                 Edit player name (
-                {player === Players.PLAYER_1 ? player1Name : player2Name})
+                {player === Players.PLAYER_1
+                  ? solverState.player1Name
+                  : solverState.player2Name}
+                )
               </ModalHeader>
               <ModalBody className="p-[1.5rem]">
                 <form

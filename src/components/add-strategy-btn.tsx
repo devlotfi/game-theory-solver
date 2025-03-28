@@ -14,13 +14,14 @@ import { SolverContext } from "../context/solver-context";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { ValidatedInput } from "./validated-input";
+import { SolverUtils } from "../solver-utils";
 
 interface Props {
   player: Players;
 }
 
 export default function AddStrategyBtn({ player }: Props) {
-  const { player1Name, player2Name, addStrategy } = useContext(SolverContext);
+  const { solverState, setSolverState } = useContext(SolverContext);
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   const formik = useFormik({
@@ -31,7 +32,9 @@ export default function AddStrategyBtn({ player }: Props) {
       strategyName: yup.string().min(1).max(64).required(),
     }),
     onSubmit(values, formikHelpers) {
-      addStrategy(player, values.strategyName);
+      setSolverState(
+        SolverUtils.addStrategy(solverState, player, values.strategyName)
+      );
       formikHelpers.resetForm();
       onClose();
     },
@@ -52,7 +55,10 @@ export default function AddStrategyBtn({ player }: Props) {
             <>
               <ModalHeader className="flex flex-col gap-1">
                 Add strategy (
-                {player === Players.PLAYER_1 ? player1Name : player2Name})
+                {player === Players.PLAYER_1
+                  ? solverState.player1Name
+                  : solverState.player2Name}
+                )
               </ModalHeader>
               <ModalBody className="p-[1.5rem]">
                 <form

@@ -10,6 +10,7 @@ import { SolverContext } from "../context/solver-context";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { ValidatedInput } from "./validated-input";
+import { SolverUtils } from "../solver-utils";
 
 interface TableCellProps {
   gains: [number, number];
@@ -17,7 +18,7 @@ interface TableCellProps {
 }
 
 export default function TableCell({ gains, coords }: TableCellProps) {
-  const { setGainValue, highlightedCells } = useContext(SolverContext);
+  const { solverState, setSolverState } = useContext(SolverContext);
 
   const formik = useFormik({
     initialValues: {
@@ -29,7 +30,12 @@ export default function TableCell({ gains, coords }: TableCellProps) {
       gainsPlayer2: yup.number().required(),
     }),
     onSubmit(values) {
-      setGainValue(coords, [values.gainsPlayer1, values.gainsPlayer2]);
+      setSolverState(
+        SolverUtils.setGainValue(solverState, coords, [
+          values.gainsPlayer1,
+          values.gainsPlayer2,
+        ])
+      );
     },
   });
 
@@ -48,7 +54,7 @@ export default function TableCell({ gains, coords }: TableCellProps) {
           <div
             className={cn(
               "flex h-full w-full px-[0.5rem] rounded-md cursor-pointer justify-center items-center bg-background border border-divider hover:bg-content3 duration-250 transition-background",
-              highlightedCells.has(`[${coords[0]},${coords[1]}]`) &&
+              solverState.highlightedCells.has(`[${coords[0]},${coords[1]}]`) &&
                 "bg-[hsl(var(--heroui-primary)/0.5)]"
             )}
           >

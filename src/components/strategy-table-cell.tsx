@@ -20,6 +20,7 @@ import { faPenAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { ValidatedInput } from "../components/validated-input";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { SolverUtils } from "../solver-utils";
 
 interface StrategyTableCellProps {
   strategy: Strategy;
@@ -31,12 +32,7 @@ export default function StrategyTableCell({
   strategy,
 }: StrategyTableCellProps) {
   const [open, setOpen] = useState<boolean>(false);
-  const {
-    removeStrategy,
-    editStrategy,
-    highlightedPlayer1Strategies,
-    highlightedPlayer2Strategies,
-  } = useContext(SolverContext);
+  const { solverState, setSolverState } = useContext(SolverContext);
   const {
     isOpen: isOpenDelete,
     onOpen: onOpenDelete,
@@ -58,7 +54,14 @@ export default function StrategyTableCell({
       strategyName: yup.string().min(1).max(64).required(),
     }),
     onSubmit(values) {
-      editStrategy(player, strategy.id, values.strategyName);
+      setSolverState(
+        SolverUtils.editStrategy(
+          solverState,
+          player,
+          strategy.id,
+          values.strategyName
+        )
+      );
       onCloseEdit();
     },
   });
@@ -82,7 +85,13 @@ export default function StrategyTableCell({
                 <Button
                   color="danger"
                   onPress={() => {
-                    removeStrategy(player, strategy.id);
+                    setSolverState(
+                      SolverUtils.removeStrategy(
+                        solverState,
+                        player,
+                        strategy.id
+                      )
+                    );
                     onCloseDelete();
                   }}
                   startContent={
@@ -151,9 +160,9 @@ export default function StrategyTableCell({
               className={cn(
                 "flex h-[3rem] px-[0.5rem] text-[11pt] min-w-[6rem] whitespace-nowrap rounded-md border border-divider justify-center items-center bg-content1 hover:bg-content3 duration-250 transition-background",
                 (player === Players.PLAYER_1 &&
-                  highlightedPlayer1Strategies.has(strategy.id)) ||
+                  solverState.highlightedPlayer1Strategies.has(strategy.id)) ||
                   (player === Players.PLAYER_2 &&
-                    highlightedPlayer2Strategies.has(strategy.id) &&
+                    solverState.highlightedPlayer2Strategies.has(strategy.id) &&
                     "bg-[hsl(var(--heroui-primary)/0.5)]")
               )}
             >
