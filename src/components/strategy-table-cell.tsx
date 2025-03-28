@@ -144,7 +144,7 @@ export default function StrategyTableCell({
       </Modal>
 
       <Popover
-        isOpen={open}
+        isOpen={solverState.action ? false : open}
         onOpenChange={(open) => setOpen(open)}
         placement={player === Players.PLAYER_1 ? "right" : "bottom"}
         showArrow
@@ -162,8 +162,9 @@ export default function StrategyTableCell({
                 (player === Players.PLAYER_1 &&
                   solverState.highlightedPlayer1Strategies.has(strategy.id)) ||
                   (player === Players.PLAYER_2 &&
-                    solverState.highlightedPlayer2Strategies.has(strategy.id) &&
-                    "bg-[hsl(var(--heroui-primary)/0.5)]")
+                    solverState.highlightedPlayer2Strategies.has(strategy.id))
+                  ? "bg-[hsl(var(--heroui-primary)/0.5)]"
+                  : null
               )}
             >
               {strategy.name}

@@ -7,7 +7,7 @@ export default function PlayerNamesLayout({ children }: PropsWithChildren) {
   const { solverState } = useContext(SolverContext);
 
   return (
-    <div className="grid flex-1 grid-cols-[2.7rem_auto] grid-rows-[2.7rem_auto]">
+    <div className="grid flex-1 h-[calc(100%-3.5rem)] grid-cols-[2.7rem_auto] grid-rows-[2.7rem_auto]">
       <div className="flex border-divider border-r border-b"></div>
       <div className="flex justify-center items-center gap-[0.5rem] border-divider border-b group hover:bg-content1 duration-300 transition-background">
         <div className="flex">{solverState.player2Name}</div>

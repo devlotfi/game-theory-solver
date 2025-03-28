@@ -12,6 +12,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { PyodideContext } from "../context/pyodide-context";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { Players } from "../types/players";
+import { SolverUtils } from "../solver-utils";
 
 function PlayerUtils({
   children,
@@ -34,9 +36,12 @@ function SidebarBtn({
 }: {
   icon: IconProp;
 } & ButtonProps) {
+  const { solverState } = useContext(SolverContext);
+
   return (
     <Button
-      variant="bordered"
+      variant="light"
+      isDisabled={solverState.action !== null}
       startContent={
         <div className="flex justify-center items-center min-h-[1.7rem] min-w-[1.7rem] bg-primary rounded-full text-primary-foreground">
           <FontAwesomeIcon icon={icon}></FontAwesomeIcon>
@@ -95,10 +100,32 @@ export default function Sidebar() {
 
         <div className="flex flex-col gap-[2rem] mt-[1rem]">
           <PlayerUtils playerName={solverState.player1Name}>
-            <SidebarBtn icon={faSearch}>
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findStrictlyDominantStrategies(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_1
+                  )
+                )
+              }
+            >
               Find Strictly Dominant Strategies
             </SidebarBtn>
-            <SidebarBtn icon={faSearch}>
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findWeaklyDominantStrategies(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_1
+                  )
+                )
+              }
+            >
               Find Weakly Dominant Strategies
             </SidebarBtn>
             <SidebarBtn icon={faLessThan}>
@@ -110,10 +137,32 @@ export default function Sidebar() {
           </PlayerUtils>
 
           <PlayerUtils playerName={solverState.player2Name}>
-            <SidebarBtn icon={faSearch}>
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findStrictlyDominantStrategies(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_2
+                  )
+                )
+              }
+            >
               Find Strictly Dominant Strategies
             </SidebarBtn>
-            <SidebarBtn icon={faSearch}>
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findWeaklyDominantStrategies(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_2
+                  )
+                )
+              }
+            >
               Find Weakly Dominant Strategies
             </SidebarBtn>
             <SidebarBtn icon={faLessThan}>
@@ -124,7 +173,16 @@ export default function Sidebar() {
             </SidebarBtn>
           </PlayerUtils>
 
-          <SidebarBtn icon={faSearch}>Find Nash Equilibria</SidebarBtn>
+          <SidebarBtn
+            icon={faSearch}
+            onPress={() =>
+              setSolverState(
+                SolverUtils.findNashEquilibria(solverState, pyodide)
+              )
+            }
+          >
+            Find Nash Equilibria
+          </SidebarBtn>
         </div>
       </div>
     </>

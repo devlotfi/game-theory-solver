@@ -9,6 +9,7 @@ import PlayerNamesLayout from "../../layout/player-names-layout";
 import SolverNavbar from "../../components/solver-navbar";
 import Sidebar from "../../components/sidebar";
 import { cn } from "@heroui/react";
+import ActionDetails from "../../components/action-details";
 
 export const Route = createFileRoute("/solver/")({
   component: RouteComponent,
@@ -34,7 +35,8 @@ function RouteComponent() {
             solverState.sidebarOpen && "lg:w-[calc(100dvw-18rem)]"
           )}
         >
-          <div className="flex min-h-[5rem]">lol</div>
+          <ActionDetails></ActionDetails>
+
           <PlayerNamesLayout>
             <table className="border-separate border-spacing-[0.5rem] inline-block m-auto">
               <tbody>

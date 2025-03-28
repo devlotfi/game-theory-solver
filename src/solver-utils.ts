@@ -1,7 +1,9 @@
+import { PyodideInterface } from "pyodide";
 import { SolverState } from "./context/solver-context";
 import { GainsTable } from "./types/gains-table";
 import { Players } from "./types/players";
 import { Strategy } from "./types/strategy";
+import { Actions } from "./types/actions";
 
 export class SolverUtils {
   public static addStrategy(
@@ -166,6 +168,115 @@ export class SolverUtils {
     return {
       ...solverState,
       gainsTable: updatedGainTable,
+    };
+  }
+
+  public static cellCoordsToString(coords: [number, number]) {
+    return `[${coords[0]},${coords[1]}]`;
+  }
+
+  public static clearAction(solverState: SolverState): SolverState {
+    return {
+      ...solverState,
+      action: null,
+      highlightedPlayer1Strategies: new Set(),
+      highlightedPlayer2Strategies: new Set(),
+      highlightedCells: new Set(),
+    };
+  }
+
+  public static findStrictlyDominantStrategies(
+    solverState: SolverState,
+    pyodide: PyodideInterface,
+    player: Players
+  ): SolverState {
+    const trouver_strategies_strictement_dominantes = pyodide.globals.get(
+      "trouver_strategies_strictement_dominantes"
+    );
+    const proxy = trouver_strategies_strictement_dominantes(
+      solverState.gainsTable,
+      player === Players.PLAYER_1 ? 0 : 1
+    );
+    const result: number[] = proxy.toJs();
+    proxy.destroy();
+
+    return {
+      ...solverState,
+      action: {
+        actionType: Actions.STRICTLY_DOMINANT_STRATEGIES,
+        player,
+      },
+      highlightedPlayer1Strategies:
+        player === Players.PLAYER_1
+          ? new Set(
+              result.map((index) => solverState.player1Strategies[index].id)
+            )
+          : solverState.highlightedPlayer1Strategies,
+      highlightedPlayer2Strategies:
+        player === Players.PLAYER_2
+          ? new Set(
+              result.map((index) => solverState.player2Strategies[index].id)
+            )
+          : solverState.highlightedPlayer2Strategies,
+    };
+  }
+
+  public static findWeaklyDominantStrategies(
+    solverState: SolverState,
+    pyodide: PyodideInterface,
+    player: Players
+  ): SolverState {
+    const trouver_strategies_faiblement_dominantes = pyodide.globals.get(
+      "trouver_strategies_faiblement_dominantes"
+    );
+    const proxy = trouver_strategies_faiblement_dominantes(
+      solverState.gainsTable,
+      player === Players.PLAYER_1 ? 0 : 1
+    );
+    const result: number[] = proxy.toJs();
+    proxy.destroy();
+
+    return {
+      ...solverState,
+      action: {
+        actionType: Actions.WEAKLY_DOMINANT_STRATEGIES,
+        player,
+      },
+      highlightedPlayer1Strategies:
+        player === Players.PLAYER_1
+          ? new Set(
+              result.map((index) => solverState.player1Strategies[index].id)
+            )
+          : solverState.highlightedPlayer1Strategies,
+      highlightedPlayer2Strategies:
+        player === Players.PLAYER_2
+          ? new Set(
+              result.map((index) => solverState.player2Strategies[index].id)
+            )
+          : solverState.highlightedPlayer2Strategies,
+    };
+  }
+
+  public static findNashEquilibria(
+    solverState: SolverState,
+    pyodide: PyodideInterface
+  ): SolverState {
+    const trouver_equilibres_nash = pyodide.globals.get(
+      "trouver_equilibres_nash"
+    );
+    const proxy = trouver_equilibres_nash(solverState.gainsTable);
+    const result: [number, number][] = proxy.toJs();
+    proxy.destroy();
+    console.log(result);
+
+    return {
+      ...solverState,
+      action: {
+        actionType: Actions.NASH_EQUILIBRIA,
+      },
+      highlightedCells: new Set(
+        result.map((coords) => SolverUtils.cellCoordsToString(coords))
+      ),
     };
   }
 }

@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@heroui/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SolverContext } from "../context/solver-context";
 import * as yup from "yup";
 import { useFormik } from "formik";
@@ -19,6 +19,7 @@ interface TableCellProps {
 
 export default function TableCell({ gains, coords }: TableCellProps) {
   const { solverState, setSolverState } = useContext(SolverContext);
+  const [open, setOpen] = useState<boolean>(false);
 
   const formik = useFormik({
     initialValues: {
@@ -44,18 +45,21 @@ export default function TableCell({ gains, coords }: TableCellProps) {
       <Popover
         placement="bottom"
         showArrow
+        isOpen={solverState.action ? false : open}
         onOpenChange={(open) => {
           if (!open) {
             formik.submitForm();
           }
+          setOpen(open);
         }}
       >
         <PopoverTrigger>
           <div
             className={cn(
               "flex h-full w-full px-[0.5rem] rounded-md cursor-pointer justify-center items-center bg-background border border-divider hover:bg-content3 duration-250 transition-background",
-              solverState.highlightedCells.has(`[${coords[0]},${coords[1]}]`) &&
-                "bg-[hsl(var(--heroui-primary)/0.5)]"
+              solverState.highlightedCells.has(
+                SolverUtils.cellCoordsToString(coords)
+              ) && "bg-[hsl(var(--heroui-primary)/0.5)]"
             )}
           >
             <div className="flex flex-1 justify-between items-center gap-[0.3rem]">

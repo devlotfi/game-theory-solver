@@ -9,13 +9,14 @@ export default function PyodideProvider({ children }: PropsWithChildren) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["PYODIDE"],
     queryFn: async () => {
-      /* const response = await fetch(`main.py`);
+      const response = await fetch(`main.py`);
       const code = await response.text();
       const pyodide = await loadPyodide();
       await pyodide.runPythonAsync(code);
-      return pyodide; */
-      return {};
+      return pyodide;
+      //return {};
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {
