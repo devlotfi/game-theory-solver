@@ -13,11 +13,11 @@ export default function ActionDetails() {
   if (!solverState.action) return;
 
   return (
-    <div className="flex items-center justify-between bg-content1 px-[1rem] h-[3.5rem] border-b border-divider">
+    <div className="flex items-center justify-between bg-content1 px-[1rem] h-[3.5rem] border-[2px] border-primary">
       {solverState.action.actionType ===
       Actions.STRICTLY_DOMINANT_STRATEGIES ? (
         <>
-          <div className="flex">
+          <div className="flex text-primary font-bold">
             Showing strictly dominant strategies for (
             {solverState.action.player === Players.PLAYER_1
               ? solverState.player1Name
@@ -40,7 +40,7 @@ export default function ActionDetails() {
       ) : solverState.action.actionType ===
         Actions.WEAKLY_DOMINANT_STRATEGIES ? (
         <>
-          <div className="flex">
+          <div className="flex text-primary font-bold">
             Showing weakly dominant strategies for (
             {solverState.action.player === Players.PLAYER_1
               ? solverState.player1Name
@@ -68,7 +68,9 @@ export default function ActionDetails() {
         <>ELIMINATE_WEAKLY_DOMINATED_STRATEGY</>
       ) : solverState.action.actionType === Actions.NASH_EQUILIBRIA ? (
         <>
-          <div className="flex">Showing nash equilibria</div>
+          <div className="flex text-primary font-bold">
+            Showing nash equilibria
+          </div>
           <div className="flex">
             <Button
               color="danger"

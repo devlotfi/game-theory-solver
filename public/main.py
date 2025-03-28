@@ -36,6 +36,41 @@ def trouver_strategies_faiblement_dominantes(table_gains, joueur):
 
     return faiblement_dominantes
 
+def eliminer_strategie_fortement_dominee(table_gains, joueur):
+    nb_strategies = len(table_gains)
+    nb_strategies_autre = len(table_gains[0])
+    
+    for i in range(nb_strategies):
+        for j in range(nb_strategies):
+            if i != j:
+                strictement_dominee = all(
+                    table_gains[i][k][joueur] < table_gains[j][k][joueur] for k in range(nb_strategies_autre)
+                )
+                if strictement_dominee:
+                    return i  # Retourne l'index à éliminer
+
+    return None  # Aucune stratégie fortement dominée trouvée
+
+
+def eliminer_strategie_faiblement_dominee(table_gains, joueur):
+    nb_strategies = len(table_gains)
+    nb_strategies_autre = len(table_gains[0])
+    
+    for i in range(nb_strategies):
+        for j in range(nb_strategies):
+            if i != j:
+                domine_partout = all(
+                    table_gains[i][k][joueur] <= table_gains[j][k][joueur] for k in range(nb_strategies_autre)
+                )
+                au_moins_une_stricte = any(
+                    table_gains[i][k][joueur] < table_gains[j][k][joueur] for k in range(nb_strategies_autre)
+                )
+
+                if domine_partout and au_moins_une_stricte:
+                    return i  # Retourne l'index à éliminer
+
+    return None  # Aucune stratégie faiblement dominée trouvée
+
 def trouver_equilibres_nash(table_gains):
     nb_strategies_j1 = len(table_gains)
     nb_strategies_j2 = len(table_gains[0])
