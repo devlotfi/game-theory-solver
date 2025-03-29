@@ -12,37 +12,15 @@ export default function ActionDetails() {
 
   if (!solverState.action) return;
 
+  const { action } = solverState;
+
   return (
     <div className="flex items-center justify-between bg-primary px-[1rem] h-[3.5rem] border-b border-divider">
-      {solverState.action.actionType ===
-      Actions.STRICTLY_DOMINANT_STRATEGIES ? (
+      {action.actionType === Actions.STRICTLY_DOMINANT_STRATEGIES ? (
         <>
           <div className="flex text-primary-foreground font-bold">
             Showing strictly dominant strategies for (
-            {solverState.action.player === Players.PLAYER_1
-              ? solverState.player1Name
-              : solverState.player2Name}
-            )
-          </div>
-          <div className="flex">
-            <Button
-              variant="flat"
-              className="bg-content1"
-              startContent={<FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>}
-              onPress={() => {
-                setSolverState(SolverUtils.clearAction(solverState));
-              }}
-            >
-              Hide
-            </Button>
-          </div>
-        </>
-      ) : solverState.action.actionType ===
-        Actions.WEAKLY_DOMINANT_STRATEGIES ? (
-        <>
-          <div className="flex text-primary-foreground font-bold">
-            Showing weakly dominant strategies for (
-            {solverState.action.player === Players.PLAYER_1
+            {action.player === Players.PLAYER_1
               ? solverState.player1Name
               : solverState.player2Name}
             )
@@ -60,12 +38,34 @@ export default function ActionDetails() {
             </Button>
           </div>
         </>
-      ) : solverState.action.actionType ===
+      ) : action.actionType === Actions.WEAKLY_DOMINANT_STRATEGIES ? (
+        <>
+          <div className="flex text-primary-foreground font-bold">
+            Showing weakly dominant strategies for (
+            {action.player === Players.PLAYER_1
+              ? solverState.player1Name
+              : solverState.player2Name}
+            )
+          </div>
+          <div className="flex">
+            <Button
+              variant="flat"
+              className="bg-content1"
+              startContent={<FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>}
+              onPress={() =>
+                setSolverState(SolverUtils.clearAction(solverState))
+              }
+            >
+              Hide
+            </Button>
+          </div>
+        </>
+      ) : action.actionType ===
         Actions.ELIMINATE_STRICTLY_DOMINATED_STRATEGY ? (
         <>
           <div className="flex text-primary-foreground font-bold">
             Eliminate strictly dominated strategy for (
-            {solverState.action.player === Players.PLAYER_1
+            {action.player === Players.PLAYER_1
               ? solverState.player1Name
               : solverState.player2Name}
             )
@@ -77,11 +77,11 @@ export default function ActionDetails() {
               className="bg-content1"
               startContent={<FontAwesomeIcon icon={faEraser}></FontAwesomeIcon>}
               onPress={() => {
-                if (solverState.action) {
+                if (action) {
                   setSolverState(
                     SolverUtils.removeHighlightedStrategies(
                       solverState,
-                      solverState.action.player
+                      action.player
                     )
                   );
                 }
@@ -101,12 +101,11 @@ export default function ActionDetails() {
             </Button>
           </div>
         </>
-      ) : solverState.action.actionType ===
-        Actions.ELIMINATE_WEAKLY_DOMINATED_STRATEGY ? (
+      ) : action.actionType === Actions.ELIMINATE_WEAKLY_DOMINATED_STRATEGY ? (
         <>
           <div className="flex text-primary-foreground font-bold">
             Showing weakly dominant strategies for (
-            {solverState.action.player === Players.PLAYER_1
+            {action.player === Players.PLAYER_1
               ? solverState.player1Name
               : solverState.player2Name}
             )
@@ -121,7 +120,7 @@ export default function ActionDetails() {
                 setSolverState(
                   SolverUtils.removeHighlightedStrategies(
                     solverState,
-                    solverState.action
+                    action.player
                   )
                 )
               }
@@ -140,7 +139,7 @@ export default function ActionDetails() {
             </Button>
           </div>
         </>
-      ) : solverState.action.actionType === Actions.NASH_EQUILIBRIA ? (
+      ) : action.actionType === Actions.NASH_EQUILIBRIA ? (
         <>
           <div className="flex text-primary-foreground font-bold">
             Showing nash equilibria

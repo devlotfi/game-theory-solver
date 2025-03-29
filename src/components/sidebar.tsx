@@ -77,6 +77,7 @@ export default function Sidebar() {
           <Button
             color="primary"
             variant="bordered"
+            isDisabled={solverState.action !== null}
             onPress={() =>
               navigate({
                 to: "/solver/examples",
