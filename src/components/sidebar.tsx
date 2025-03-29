@@ -104,7 +104,7 @@ export default function Sidebar() {
               icon={faSearch}
               onPress={() =>
                 setSolverState(
-                  SolverUtils.findStrictlyDominantStrategies(
+                  SolverUtils.findStrictlyDominantStrategy(
                     solverState,
                     pyodide,
                     Players.PLAYER_1
@@ -113,20 +113,6 @@ export default function Sidebar() {
               }
             >
               Find Strictly Dominant Strategies
-            </SidebarBtn>
-            <SidebarBtn
-              icon={faSearch}
-              onPress={() =>
-                setSolverState(
-                  SolverUtils.findWeaklyDominantStrategies(
-                    solverState,
-                    pyodide,
-                    Players.PLAYER_1
-                  )
-                )
-              }
-            >
-              Find Weakly Dominant Strategies
             </SidebarBtn>
             <SidebarBtn
               icon={faEraser}
@@ -141,20 +127,6 @@ export default function Sidebar() {
               }
             >
               Eliminate Strictly Dominated Strategy
-            </SidebarBtn>
-            <SidebarBtn
-              icon={faEraser}
-              onPress={() =>
-                setSolverState(
-                  SolverUtils.eliminateWeaklyDominatedStrategy(
-                    solverState,
-                    pyodide,
-                    Players.PLAYER_1
-                  )
-                )
-              }
-            >
-              Eliminate Weakly Dominated Strategy
             </SidebarBtn>
           </PlayerUtils>
 
@@ -163,7 +135,7 @@ export default function Sidebar() {
               icon={faSearch}
               onPress={() =>
                 setSolverState(
-                  SolverUtils.findStrictlyDominantStrategies(
+                  SolverUtils.findStrictlyDominantStrategy(
                     solverState,
                     pyodide,
                     Players.PLAYER_2
@@ -172,20 +144,6 @@ export default function Sidebar() {
               }
             >
               Find Strictly Dominant Strategies
-            </SidebarBtn>
-            <SidebarBtn
-              icon={faSearch}
-              onPress={() =>
-                setSolverState(
-                  SolverUtils.findWeaklyDominantStrategies(
-                    solverState,
-                    pyodide,
-                    Players.PLAYER_2
-                  )
-                )
-              }
-            >
-              Find Weakly Dominant Strategies
             </SidebarBtn>
             <SidebarBtn
               icon={faEraser}
@@ -200,20 +158,6 @@ export default function Sidebar() {
               }
             >
               Eliminate Strictly Dominated Strategy
-            </SidebarBtn>
-            <SidebarBtn
-              icon={faEraser}
-              onPress={() =>
-                setSolverState(
-                  SolverUtils.eliminateWeaklyDominatedStrategy(
-                    solverState,
-                    pyodide,
-                    Players.PLAYER_2
-                  )
-                )
-              }
-            >
-              Eliminate Weakly Dominated Strategy
             </SidebarBtn>
           </PlayerUtils>
 

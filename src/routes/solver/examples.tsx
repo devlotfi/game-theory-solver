@@ -216,11 +216,8 @@ function RouteComponent() {
               <div className="flex flex-col">
                 <SectionTitle>Context</SectionTitle>
                 <SectionParagraph>
-                  An attacker can launch a simple attack (low cost, low success
-                  rate) or a sophisticated attack (high cost, high impact).
-                </SectionParagraph>
-                <SectionParagraph>
-                  A defender can either ignore the attack or invest in protectio
+                  Each user maximizes their own bandwidth, but if everyone
+                  overuses it, the network becomes congested
                 </SectionParagraph>
               </div>
 

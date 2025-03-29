@@ -1,77 +1,75 @@
-def trouver_strategies_strictement_dominantes(table_gains, joueur):
-    nb_strategies = len(table_gains)  # Nombre de stratégies du joueur 1
-    nb_strategies_autre = len(table_gains[0])  # Nombre de stratégies du joueur 2
+from typing import Literal
 
-    dominantes = []
-    for i in range(nb_strategies):
-        domine_toutes = True
-        for j in range(nb_strategies):
-            if i != j:
-                if any(table_gains[i][k][joueur] <= table_gains[j][k][joueur] for k in range(nb_strategies_autre)):
-                    domine_toutes = False
+
+def trouver_strategie_strictement_dominante(
+    table_gains: list[list[tuple[int, int]]], joueur: Literal[0, 1]
+) -> int | None:
+    nb_strategies = len(table_gains) if joueur == 0 else len(table_gains[0])
+
+    for index_strategie in range(nb_strategies):
+        strictement_dominante = True
+        for autre_strategie in range(nb_strategies):
+            if index_strategie == autre_strategie:
+                continue
+            for index_strategie_autre in range(
+                len(table_gains[0]) if joueur == 0 else len(table_gains)
+            ):
+                gain_courant = (
+                    table_gains[index_strategie][index_strategie_autre][joueur]
+                    if joueur == 0
+                    else table_gains[index_strategie_autre][index_strategie][joueur]
+                )
+                gain_autre = (
+                    table_gains[autre_strategie][index_strategie_autre][joueur]
+                    if joueur == 0
+                    else table_gains[index_strategie_autre][autre_strategie][joueur]
+                )
+                if gain_courant <= gain_autre:
+                    strictement_dominante = False
                     break
-        if domine_toutes:
-            dominantes.append(i)
-    
-    return dominantes
+            if not strictement_dominante:
+                break
+        if strictement_dominante:
+            return index_strategie  # Retourne l'index de la stratégie strictement dominante
+
+    return None  # Aucune stratégie strictement dominante trouvée
 
 
-def trouver_strategies_faiblement_dominantes(table_gains, joueur):
-    nb_strategies = len(table_gains)
-    nb_strategies_autre = len(table_gains[0])
-    
-    faiblement_dominantes = []
-    for i in range(nb_strategies):
-        domine_ou_egale_toutes = True
-        domine_au_moins_une = False
-        for j in range(nb_strategies):
-            if i != j:
-                if any(table_gains[i][k][joueur] < table_gains[j][k][joueur] for k in range(nb_strategies_autre)):
-                    domine_ou_egale_toutes = False
-                    break
-                if any(table_gains[i][k][joueur] > table_gains[j][k][joueur] for k in range(nb_strategies_autre)):
-                    domine_au_moins_une = True
-        if domine_ou_egale_toutes and domine_au_moins_une:
-            faiblement_dominantes.append(i)
+def trouver_premiere_dominance_stricte(
+    table_gains: list[list[tuple[int, int]]], joueur: Literal[0, 1]
+) -> int | None:
+    nb_strategies = len(table_gains) if joueur == 0 else len(table_gains[0])
 
-    return faiblement_dominantes
+    for i in range(nb_strategies):  # Parcours des stratégies possibles
+        for j in range(nb_strategies):  # Comparaison avec une autre stratégie
+            if i == j:
+                continue  # Une stratégie ne peut pas se dominer elle-même
 
-def eliminer_strategie_fortement_dominee(table_gains, joueur):
-    nb_strategies = len(table_gains)
-    nb_strategies_autre = len(table_gains[0])
-    
-    for i in range(nb_strategies):
-        for j in range(nb_strategies):
-            if i != j:
-                strictement_dominee = all(
-                    table_gains[i][k][joueur] < table_gains[j][k][joueur] for k in range(nb_strategies_autre)
+            strictement_dominante = True
+
+            for k in range(len(table_gains[0]) if joueur == 0 else len(table_gains)):
+                gain_i = (
+                    table_gains[i][k][joueur]
+                    if joueur == 0
+                    else table_gains[k][i][joueur]
                 )
-                if strictement_dominee:
-                    return i  # Retourne l'index à éliminer
-
-    return None  # Aucune stratégie fortement dominée trouvée
-
-
-def eliminer_strategie_faiblement_dominee(table_gains, joueur):
-    nb_strategies = len(table_gains)
-    nb_strategies_autre = len(table_gains[0])
-    
-    for i in range(nb_strategies):
-        for j in range(nb_strategies):
-            if i != j:
-                domine_partout = all(
-                    table_gains[i][k][joueur] <= table_gains[j][k][joueur] for k in range(nb_strategies_autre)
-                )
-                au_moins_une_stricte = any(
-                    table_gains[i][k][joueur] < table_gains[j][k][joueur] for k in range(nb_strategies_autre)
+                gain_j = (
+                    table_gains[j][k][joueur]
+                    if joueur == 0
+                    else table_gains[k][j][joueur]
                 )
 
-                if domine_partout and au_moins_une_stricte:
-                    return i  # Retourne l'index à éliminer
+                if gain_i <= gain_j:
+                    strictement_dominante = False
+                    break  # Dès qu'on trouve une exception, on arrête
 
-    return None  # Aucune stratégie faiblement dominée trouvée
+            if strictement_dominante:
+                return j  # i domine strictement j
 
-def trouver_equilibres_nash(table_gains):
+    return None  # Aucune domination stricte trouvée
+
+
+def trouver_equilibres_nash(table_gains: list[list[tuple[int, int]]]):
     nb_strategies_j1 = len(table_gains)
     nb_strategies_j2 = len(table_gains[0])
     equilibres = []
