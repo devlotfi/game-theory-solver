@@ -257,6 +257,131 @@ export class SolverUtils {
     };
   }
 
+  public static eliminateStrictlyDominatedStrategy(
+    solverState: SolverState,
+    pyodide: PyodideInterface,
+    player: Players
+  ): SolverState {
+    const eliminer_strategie_fortement_dominee = pyodide.globals.get(
+      "eliminer_strategie_fortement_dominee"
+    );
+    const result: number | undefined = eliminer_strategie_fortement_dominee(
+      solverState.gainsTable,
+      player === Players.PLAYER_1 ? 0 : 1
+    );
+    console.log(result);
+
+    if (result === undefined)
+      return {
+        ...solverState,
+        action: {
+          actionType: Actions.ELIMINATE_STRICTLY_DOMINATED_STRATEGY,
+          player,
+        },
+      };
+    const strategyArray = [result];
+
+    return {
+      ...solverState,
+      action: {
+        actionType: Actions.ELIMINATE_STRICTLY_DOMINATED_STRATEGY,
+        player,
+      },
+      highlightedPlayer1Strategies:
+        player === Players.PLAYER_1
+          ? new Set(
+              strategyArray.map(
+                (index) => solverState.player1Strategies[index].id
+              )
+            )
+          : solverState.highlightedPlayer1Strategies,
+      highlightedPlayer2Strategies:
+        player === Players.PLAYER_2
+          ? new Set(
+              strategyArray.map(
+                (index) => solverState.player2Strategies[index].id
+              )
+            )
+          : solverState.highlightedPlayer2Strategies,
+    };
+  }
+
+  public static eliminateWeaklyDominatedStrategy(
+    solverState: SolverState,
+    pyodide: PyodideInterface,
+    player: Players
+  ): SolverState {
+    const eliminer_strategie_faiblement_dominee = pyodide.globals.get(
+      "eliminer_strategie_faiblement_dominee"
+    );
+    const result: number | undefined = eliminer_strategie_faiblement_dominee(
+      solverState.gainsTable,
+      player === Players.PLAYER_1 ? 0 : 1
+    );
+    console.log(result);
+
+    if (result === undefined)
+      return {
+        ...solverState,
+        action: {
+          actionType: Actions.ELIMINATE_WEAKLY_DOMINATED_STRATEGY,
+          player,
+        },
+      };
+    const strategyArray = [result];
+
+    return {
+      ...solverState,
+      action: {
+        actionType: Actions.ELIMINATE_WEAKLY_DOMINATED_STRATEGY,
+        player,
+      },
+      highlightedPlayer1Strategies:
+        player === Players.PLAYER_1
+          ? new Set(
+              strategyArray.map(
+                (index) => solverState.player1Strategies[index].id
+              )
+            )
+          : solverState.highlightedPlayer1Strategies,
+      highlightedPlayer2Strategies:
+        player === Players.PLAYER_2
+          ? new Set(
+              strategyArray.map(
+                (index) => solverState.player2Strategies[index].id
+              )
+            )
+          : solverState.highlightedPlayer2Strategies,
+    };
+  }
+
+  public static removeHighlightedStrategies(
+    solverState: SolverState,
+    player: Players
+  ): SolverState {
+    if (player === Players.PLAYER_1) {
+      for (const strategyId of solverState.highlightedPlayer1Strategies) {
+        solverState = SolverUtils.removeStrategy(
+          solverState,
+          Players.PLAYER_1,
+          strategyId
+        );
+      }
+    } else {
+      for (const strategyId of solverState.highlightedPlayer2Strategies) {
+        solverState = SolverUtils.removeStrategy(
+          solverState,
+          Players.PLAYER_2,
+          strategyId
+        );
+      }
+    }
+    return {
+      ...solverState,
+      action: null,
+    };
+  }
+
   public static findNashEquilibria(
     solverState: SolverState,
     pyodide: PyodideInterface

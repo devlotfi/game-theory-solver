@@ -5,8 +5,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDownload,
-  faLessThan,
-  faLessThanEqual,
+  faEraser,
   faSearch,
   faWrench,
 } from "@fortawesome/free-solid-svg-icons";
@@ -128,10 +127,32 @@ export default function Sidebar() {
             >
               Find Weakly Dominant Strategies
             </SidebarBtn>
-            <SidebarBtn icon={faLessThan}>
+            <SidebarBtn
+              icon={faEraser}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.eliminateStrictlyDominatedStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_1
+                  )
+                )
+              }
+            >
               Eliminate Strictly Dominated Strategy
             </SidebarBtn>
-            <SidebarBtn icon={faLessThanEqual}>
+            <SidebarBtn
+              icon={faEraser}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.eliminateWeaklyDominatedStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_1
+                  )
+                )
+              }
+            >
               Eliminate Weakly Dominated Strategy
             </SidebarBtn>
           </PlayerUtils>
@@ -165,10 +186,32 @@ export default function Sidebar() {
             >
               Find Weakly Dominant Strategies
             </SidebarBtn>
-            <SidebarBtn icon={faLessThan}>
+            <SidebarBtn
+              icon={faEraser}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.eliminateStrictlyDominatedStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_2
+                  )
+                )
+              }
+            >
               Eliminate Strictly Dominated Strategy
             </SidebarBtn>
-            <SidebarBtn icon={faLessThanEqual}>
+            <SidebarBtn
+              icon={faEraser}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.eliminateWeaklyDominatedStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_2
+                  )
+                )
+              }
+            >
               Eliminate Weakly Dominated Strategy
             </SidebarBtn>
           </PlayerUtils>
