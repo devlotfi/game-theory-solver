@@ -25,7 +25,7 @@ function RouteComponent() {
           <Card className="p-[1rem] border border-divider">
             <CardHeader>
               <div className="flex text-[20pt] font-bold">
-                Welcome to game theory solver
+                Welcome to game theory solver.
               </div>
             </CardHeader>
             <CardBody className="flex-col gap-[0.7rem]">
