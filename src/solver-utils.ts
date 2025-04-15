@@ -1,7 +1,7 @@
 import { PyodideInterface } from "pyodide";
 import { SolverState } from "./context/solver-context";
 import { GainsTable } from "./types/gains-table";
-import { Players } from "./types/players";
+
 import { Strategy } from "./types/strategy";
 import { Actions } from "./types/actions";
 
@@ -10,27 +10,7 @@ export class SolverUtils {
     solverState: SolverState,
     player: Players,
     name: string
-  ): SolverState {
-    if (player === Players.PLAYER_1) {
-      return {
-        ...solverState,
-        ...SolverUtils.addRow(solverState),
-        player1Strategies: [
-          ...solverState.player1Strategies,
-          new Strategy(name),
-        ],
-      };
-    } else {
-      return {
-        ...solverState,
-        ...SolverUtils.addColumn(solverState),
-        player2Strategies: [
-          ...solverState.player2Strategies,
-          new Strategy(name),
-        ],
-      };
-    }
-  }
+  ): SolverState {}
 
   public static editStrategy(
     solverState: SolverState,

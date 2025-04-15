@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { SolverContext } from "../context/solver-context";
 import { Actions } from "../types/actions";
-import { Players } from "../types/players";
 import { Button } from "@heroui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEraser, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -19,11 +18,7 @@ export default function ActionDetails() {
       {action.actionType === Actions.STRICTLY_DOMINANT_STRATEGIES ? (
         <>
           <div className="flex text-primary-foreground font-bold">
-            Showing strictly dominant strategies for (
-            {action.player === Players.PLAYER_1
-              ? solverState.player1Name
-              : solverState.player2Name}
-            )
+            Showing strictly dominant strategies for ( )
           </div>
           <div className="flex">
             <Button
@@ -41,11 +36,7 @@ export default function ActionDetails() {
       ) : action.actionType === Actions.WEAKLY_DOMINANT_STRATEGIES ? (
         <>
           <div className="flex text-primary-foreground font-bold">
-            Showing weakly dominant strategies for (
-            {action.player === Players.PLAYER_1
-              ? solverState.player1Name
-              : solverState.player2Name}
-            )
+            Showing weakly dominant strategies for ( )
           </div>
           <div className="flex">
             <Button
@@ -64,11 +55,7 @@ export default function ActionDetails() {
         Actions.ELIMINATE_STRICTLY_DOMINATED_STRATEGY ? (
         <>
           <div className="flex text-primary-foreground font-bold">
-            Eliminate strictly dominated strategy for (
-            {action.player === Players.PLAYER_1
-              ? solverState.player1Name
-              : solverState.player2Name}
-            )
+            Eliminate strictly dominated strategy for ( )
           </div>
           <div className="flex gap-[0.5rem]">
             <Button
@@ -104,11 +91,7 @@ export default function ActionDetails() {
       ) : action.actionType === Actions.ELIMINATE_WEAKLY_DOMINATED_STRATEGY ? (
         <>
           <div className="flex text-primary-foreground font-bold">
-            Showing weakly dominant strategies for (
-            {action.player === Players.PLAYER_1
-              ? solverState.player1Name
-              : solverState.player2Name}
-            )
+            Showing weakly dominant strategies for ( )
           </div>
           <div className="flex gap-[0.5rem]">
             <Button

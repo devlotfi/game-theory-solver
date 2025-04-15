@@ -1,1 +1,1 @@
-export type GainsTable = [number, number][][];
+export type GainsTable = [string, number][][];
