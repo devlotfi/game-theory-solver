@@ -1,16 +1,24 @@
 import { createContext } from "react";
 import { Strategy } from "../types/strategy";
-import { ActionPlayload } from "../types/actions";
-import { Player } from "../types/player";
 import { GainsTable } from "../types/gains-table";
+import { ActionPlayload } from "../types/actions";
 
 export interface SolverState {
   sidebarOpen: boolean;
-  players: Player[];
-  strategies: Strategy[];
-  highlightedStrategies: Set<string>;
-  highlightedCases: Set<string>;
+
+  player1Name: string;
+  player2Name: string;
+
+  player1Strategies: Strategy[];
+  player2Strategies: Strategy[];
+
+  highlightedPlayer1Strategies: Set<string>;
+  highlightedPlayer2Strategies: Set<string>;
+
+  highlightedCells: Set<string>;
+
   gainsTable: GainsTable;
+
   action: ActionPlayload | null;
 }
 
@@ -19,70 +27,47 @@ interface SolverContextType {
   setSolverState: (value: SolverState) => void;
 }
 
-const player1 = new Player("Player 1");
-const player2 = new Player("Player 2");
-
-const player1Strategies = [
-  new Strategy(player1.id, "Strategy 1"),
-  new Strategy(player1.id, "Strategy 2"),
-  new Strategy(player1.id, "Strategy 3"),
-];
-
-const player2Strategies = [
-  new Strategy(player2.id, "Strategy 1"),
-  new Strategy(player2.id, "Strategy 2"),
-  new Strategy(player2.id, "Strategy 3"),
-];
-
-const gainsTable: GainsTable = [
-  [
-    [player1Strategies[0].id, 4],
-    [player2Strategies[0].id, 3],
-  ],
-  [
-    [player1Strategies[0].id, 5],
-    [player2Strategies[1].id, 1],
-  ],
-  [
-    [player1Strategies[0].id, 6],
-    [player2Strategies[2].id, 2],
-  ],
-
-  [
-    [player1Strategies[1].id, 2],
-    [player2Strategies[0].id, 1],
-  ],
-  [
-    [player1Strategies[1].id, 8],
-    [player2Strategies[1].id, 4],
-  ],
-  [
-    [player1Strategies[1].id, 3],
-    [player2Strategies[2].id, 6],
-  ],
-
-  [
-    [player1Strategies[2].id, 3],
-    [player2Strategies[0].id, 0],
-  ],
-  [
-    [player1Strategies[2].id, 9],
-    [player2Strategies[1].id, 6],
-  ],
-  [
-    [player1Strategies[2].id, 2],
-    [player2Strategies[2].id, 8],
-  ],
-];
-
 export const solverContextInitialValue: SolverContextType = {
   solverState: {
     sidebarOpen: true,
-    players: [player1, player2],
-    strategies: [...player1Strategies, ...player2Strategies],
-    highlightedStrategies: new Set<string>(),
-    highlightedCases: new Set<string>(),
-    gainsTable,
+
+    player1Name: "Player 1",
+    player2Name: "Player 2",
+
+    player1Strategies: [
+      new Strategy("Strategy 1"),
+      new Strategy("Strategy 2"),
+      new Strategy("Strategy 3"),
+    ],
+    player2Strategies: [
+      new Strategy("Strategy 1"),
+      new Strategy("Strategy 2"),
+      new Strategy("Strategy 3"),
+    ],
+
+    highlightedPlayer1Strategies: new Set(),
+    highlightedPlayer2Strategies: new Set(),
+
+    highlightedCells: new Set(),
+
+    gainsTable: [
+      [
+        [4, 3],
+        [5, 1],
+        [6, 2],
+      ],
+      [
+        [2, 1],
+        [8, 4],
+        [3, 6],
+      ],
+      [
+        [3, 0],
+        [9, 6],
+        [2, 8],
+      ],
+    ],
+
     action: null,
   },
   setSolverState() {},
