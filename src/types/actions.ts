@@ -6,6 +6,7 @@ export enum Actions {
   ELIMINATE_STRICTLY_DOMINATED_STRATEGY = "ELIMINATE_STRICTLY_DOMINATED_STRATEGY",
   ELIMINATE_WEAKLY_DOMINATED_STRATEGY = "ELIMINATE_WEAKLY_DOMINATED_STRATEGY",
   NASH_EQUILIBRIA = "NASH_EQUILIBRIA",
+  PARETO_OPTIMUM = "PARETO_OPTIMUM",
 }
 
 export type ActionPlayload =
@@ -27,4 +28,7 @@ export type ActionPlayload =
     }
   | {
       actionType: Actions.NASH_EQUILIBRIA;
+    }
+  | {
+      actionType: Actions.PARETO_OPTIMUM;
     };

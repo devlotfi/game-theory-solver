@@ -1,4 +1,4 @@
-import { PropsWithChildren, useContext } from "react";
+import { ComponentProps, PropsWithChildren, useContext } from "react";
 import { Button, ButtonProps, cn, Divider } from "@heroui/react";
 import { SolverContext } from "../context/solver-context";
 import { useNavigate } from "@tanstack/react-router";
@@ -54,6 +54,28 @@ function SidebarBtn({
   );
 }
 
+function SecurityLevelDisplay({
+  player,
+  ...props
+}: {
+  player: Players;
+} & ComponentProps<"div">) {
+  const { pyodide } = useContext(PyodideContext);
+  const { solverState } = useContext(SolverContext);
+
+  return (
+    <div
+      className="flex items-center gap-[0.3rem] bg-content2 rounded-md py-[0.5rem] px-[0.7rem] text-[12pt]"
+      {...props}
+    >
+      <div className="flex">Security level:</div>
+      <div className="flex text-primary font-bold">
+        {SolverUtils.securityLevel(solverState, pyodide, player)}
+      </div>
+    </div>
+  );
+}
+
 export default function Sidebar() {
   const navigate = useNavigate();
   const { pyodide } = useContext(PyodideContext);
@@ -100,6 +122,9 @@ export default function Sidebar() {
 
         <div className="flex flex-col gap-[2rem] mt-[1rem]">
           <PlayerUtils playerName={solverState.player1Name}>
+            <SecurityLevelDisplay
+              player={Players.PLAYER_1}
+            ></SecurityLevelDisplay>
             <SidebarBtn
               icon={faSearch}
               onPress={() =>
@@ -131,6 +156,9 @@ export default function Sidebar() {
           </PlayerUtils>
 
           <PlayerUtils playerName={solverState.player2Name}>
+            <SecurityLevelDisplay
+              player={Players.PLAYER_2}
+            ></SecurityLevelDisplay>
             <SidebarBtn
               icon={faSearch}
               onPress={() =>
@@ -161,16 +189,28 @@ export default function Sidebar() {
             </SidebarBtn>
           </PlayerUtils>
 
-          <SidebarBtn
-            icon={faSearch}
-            onPress={() =>
-              setSolverState(
-                SolverUtils.findNashEquilibria(solverState, pyodide)
-              )
-            }
-          >
-            Find Nash Equilibria
-          </SidebarBtn>
+          <div className="flex flex-col gap-[0.3rem]">
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findNashEquilibria(solverState, pyodide)
+                )
+              }
+            >
+              Find Nash Equilibria
+            </SidebarBtn>
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findParetoOptimum(solverState, pyodide)
+                )
+              }
+            >
+              Find Pareto Optimum
+            </SidebarBtn>
+          </div>
         </div>
       </div>
     </>

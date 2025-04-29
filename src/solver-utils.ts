@@ -323,4 +323,41 @@ export class SolverUtils {
       ),
     };
   }
+
+  public static findParetoOptimum(
+    solverState: SolverState,
+    pyodide: PyodideInterface
+  ): SolverState {
+    const trouver_optimums_pareto = pyodide.globals.get(
+      "trouver_optimums_pareto"
+    );
+    const proxy = trouver_optimums_pareto(solverState.gainsTable);
+    const result: [number, number][] = proxy.toJs();
+    proxy.destroy();
+    console.log(result);
+
+    return {
+      ...solverState,
+      action: {
+        actionType: Actions.PARETO_OPTIMUM,
+      },
+      highlightedCells: new Set(
+        result.map((coords) => SolverUtils.cellCoordsToString(coords))
+      ),
+    };
+  }
+
+  public static securityLevel(
+    solverState: SolverState,
+    pyodide: PyodideInterface,
+    player: Players
+  ): number {
+    const niveau_de_securite = pyodide.globals.get("niveau_de_securite");
+    const result = niveau_de_securite(
+      solverState.gainsTable,
+      player === Players.PLAYER_1 ? 0 : 1
+    );
+
+    return result;
+  }
 }

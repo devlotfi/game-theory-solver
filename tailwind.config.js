@@ -56,7 +56,7 @@ export default {
               foreground: "#E7EFF2",
             },
             content2: {
-              DEFAULT: "#131724",
+              DEFAULT: "#1B202F",
               foreground: "#E7EFF2",
             },
             content3: {
@@ -64,7 +64,7 @@ export default {
               foreground: "#E7EFF2",
             },
             background: {
-              DEFAULT: "#131724",
+              DEFAULT: "#1B202F",
               foreground: "#E7EFF2",
             },
             default: {

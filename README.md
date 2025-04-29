@@ -1,54 +1,77 @@
-# React + TypeScript + Vite
+<img src="https://raw.githubusercontent.com/devlotfi/game-theory-solver/main/github-assets/github-banner.png">
+<img src="https://raw.githubusercontent.com/devlotfi/game-theory-solver/main/github-assets/university-project.png">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 📜 game-theory-solver
 
-Currently, two official plugins are available:
+A medical management system, that allows simplifies managing patients, staff, appointments and medical procedures
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🏫 USTHB University Project
 
-## Expanding the ESLint configuration
+This This project was completed as part of the **Information Systems 2 (SI2)** module at **USTHB** during the **2023/2024 year L3 semester 5**.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Project development:** Debbal Lotfi
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+**Project report:** Tehar Ahmed
+
+# 📌 Contents
+
+- [Tech stack](#-tech-stack)
+- [Project setup](#-project-setup)
+- [Preview](#-preview)
+
+# 💻 Tech stack
+
+## Frontend
+
+<p float="left">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/html.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/css.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/tailwind.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/fontawesome.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/daisyui.svg">
+</p>
+
+## Backend
+
+<p float="left">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/django.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/sqlite.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/python.svg">
+</p>
+
+# 📂 Project Setup
+
+## Requirements
+
+- Python
+- Poetry
+- Node JS
+- Yarn
+
+## Install
+
+```bash
+$ poetry install --no-root
+
+# OPTIONAL: Only for tailwind compiler
+$ yarn
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+$ poetry run python src/manage.py runserver
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+# OPTIONAL: Only for tailwind compiler
+$ yarn run dev
 ```
+
+# 📷 Preview
+
+<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-1.png">
+<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-2.png">
+<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-3.png">
+<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-4.png">
+<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-5.png">
+<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-6.png">
+<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-7.png">

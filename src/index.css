@@ -7,3 +7,25 @@
   font-optical-sizing: auto;
   font-style: normal;
 }
+
+@layer utilities {
+  .dotted-bg-light {
+    background-image:
+      radial-gradient(#f4f4f4 50%, transparent),
+      radial-gradient(#d87e2a 0.1rem, #f4f4f4 0.1rem);
+    background-size:
+      100% 100%,
+      3rem 3rem,
+      3rem 3rem;
+  }
+
+  .dotted-bg-dark {
+    background-image:
+      radial-gradient(#1b202f 50%, transparent),
+      radial-gradient(#d87e2a 0.1rem, #1b202f 0.1rem);
+    background-size:
+      100% 100%,
+      3rem 3rem,
+      3rem 3rem;
+  }
+}

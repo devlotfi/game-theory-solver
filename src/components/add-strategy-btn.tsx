@@ -42,7 +42,13 @@ export default function AddStrategyBtn({ player }: Props) {
 
   return (
     <>
-      <Button isIconOnly color="primary" variant="light" onPress={onOpen}>
+      <Button
+        isIconOnly
+        isDisabled={solverState.action !== null}
+        color="primary"
+        variant="light"
+        onPress={onOpen}
+      >
         <FontAwesomeIcon
           icon={faPlus}
           className="text-[18pt]"

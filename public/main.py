@@ -90,3 +90,56 @@ def trouver_equilibres_nash(table_gains: list[list[tuple[int, int]]]):
                 equilibres.append((i, j))
 
     return equilibres
+
+
+def trouver_optimums_pareto(
+    table_gains: list[list[tuple[int, int]]],
+) -> list[tuple[int, int]]:
+    nb_strategies_j1 = len(table_gains)
+    nb_strategies_j2 = len(table_gains[0])
+    pareto_optima = []
+
+    for i in range(nb_strategies_j1):
+        for j in range(nb_strategies_j2):
+            gain_ij = table_gains[i][j]
+            est_domine = False
+
+            for x in range(nb_strategies_j1):
+                for y in range(nb_strategies_j2):
+                    if (x, y) == (i, j):
+                        continue
+
+                    gain_xy = table_gains[x][y]
+
+                    # Si (x, y) est au moins aussi bon pour les 2 joueurs, et strictement meilleur pour l'un d'eux
+                    if (gain_xy[0] >= gain_ij[0] and gain_xy[1] >= gain_ij[1]) and (
+                        gain_xy[0] > gain_ij[0] or gain_xy[1] > gain_ij[1]
+                    ):
+                        est_domine = True
+                        break
+                if est_domine:
+                    break
+
+            if not est_domine:
+                pareto_optima.append((i, j))
+
+    return pareto_optima
+
+
+def niveau_de_securite(
+    table_gains: list[list[tuple[int, int]]], joueur: Literal[0, 1]
+) -> int:
+    nb_strategies_j1 = len(table_gains)  # nombre de lignes
+    nb_strategies_j2 = len(table_gains[0])  # nombre de colonnes
+    if joueur == 0:
+        pires_gains = []
+        for i in range(nb_strategies_j1):
+            pire_gain = min(table_gains[i][j][0] for j in range(nb_strategies_j2))
+            pires_gains.append(pire_gain)
+        return max(pires_gains)
+    elif joueur == 1:
+        pires_gains = []
+        for j in range(nb_strategies_j2):
+            pire_gain = min(table_gains[i][j][1] for i in range(nb_strategies_j1))
+            pires_gains.append(pire_gain)
+        return max(pires_gains)

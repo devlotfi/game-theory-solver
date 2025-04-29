@@ -157,6 +157,24 @@ export default function ActionDetails() {
             </Button>
           </div>
         </>
+      ) : action.actionType === Actions.PARETO_OPTIMUM ? (
+        <>
+          <div className="flex text-primary-foreground font-bold">
+            Showing pareto optimum
+          </div>
+          <div className="flex">
+            <Button
+              variant="flat"
+              className="bg-content1"
+              startContent={<FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>}
+              onPress={() =>
+                setSolverState(SolverUtils.clearAction(solverState))
+              }
+            >
+              Hide
+            </Button>
+          </div>
+        </>
       ) : null}
     </div>
   );

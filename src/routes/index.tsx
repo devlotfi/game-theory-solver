@@ -15,12 +15,12 @@ function RouteComponent() {
     <div className="flex flex-1 flex-col">
       <Navbar></Navbar>
 
-      <div className="flex flex-1 lg:items-center justify-center">
+      <div className="flex dotted-bg-light dark:dotted-bg-dark flex-1 lg:items-center justify-center">
         <div className="flex flex-col lg:flex-row items-center max-w-screen-lg p-[1rem] lg:p-[2rem] gap-[2rem]">
           <img
             src={SolverSVG}
             alt="calculator"
-            className=" h-[12em] lg:h-[20rem]"
+            className=" h-[8em] lg:h-[16rem]"
           />
           <Card className="p-[1rem] border border-divider">
             <CardHeader>

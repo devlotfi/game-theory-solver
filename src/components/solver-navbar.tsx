@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { SolverContext } from "../context/solver-context";
 import GithubBtn from "./github-btn";
+import { useNavigate } from "@tanstack/react-router";
 
 export default function SolverNavbar() {
+  const navigate = useNavigate();
   const { solverState, setSolverState } = useContext(SolverContext);
 
   return (
@@ -32,10 +34,13 @@ export default function SolverNavbar() {
             )}
           ></FontAwesomeIcon>
         </Button>
-        <img src={LogoSVG} alt="logo" className="h-[2.3rem]" />
-        <div className="hidden sm:flex font-bold text-[15pt] font-['Fugaz_One']">
-          Game Theory Solver
-        </div>
+
+        <Button size="lg" variant="light" onPress={() => navigate({ to: "/" })}>
+          <img src={LogoSVG} alt="logo" className="h-[2.3rem]" />
+          <div className="hidden sm:flex font-bold text-[15pt] font-['Fugaz_One']">
+            Game Theory Solver
+          </div>
+        </Button>
       </div>
 
       <div className="flex gap-[0.5rem]">
