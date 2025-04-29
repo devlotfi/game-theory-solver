@@ -21,13 +21,17 @@ This This project was completed as part of the **Optimization Techniques** modul
 
 # 💻 Tech stack
 
-<p float="left">
+<div float="left">
   <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/html.svg">
   <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/css.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/ts.svg">
   <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/tailwind.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/react.svg">
   <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/fontawesome.svg">
-  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/daisyui.svg">
-</p>
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/heroui.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/python.svg">
+  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/pyodide.svg">
+</div>
 
 # 📂 Project Setup
 
