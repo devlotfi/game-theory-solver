@@ -3,15 +3,15 @@
 
 # 📜 game-theory-solver
 
-A medical management system, that allows simplifies managing patients, staff, appointments and medical procedures
+A web app used to perform multiple types of operations on a gains table of 2 players
 
 ## 🏫 USTHB University Project
 
-This This project was completed as part of the **Information Systems 2 (SI2)** module at **USTHB** during the **2023/2024 year L3 semester 5**.
+This This project was completed as part of the **Optimization Techniques** module at **USTHB** during the **2024/2025 year M1 semester 2**.
 
 **Project development:** Debbal Lotfi
 
-**Project report:** Tehar Ahmed
+**Project report:** Makesse Abdelaziz
 
 # 📌 Contents
 
@@ -21,8 +21,6 @@ This This project was completed as part of the **Information Systems 2 (SI2)** m
 
 # 💻 Tech stack
 
-## Frontend
-
 <p float="left">
   <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/html.svg">
   <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/css.svg">
@@ -31,47 +29,31 @@ This This project was completed as part of the **Information Systems 2 (SI2)** m
   <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/daisyui.svg">
 </p>
 
-## Backend
-
-<p float="left">
-  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/django.svg">
-  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/sqlite.svg">
-  <img height="50px" src="https://devlotfi.github.io/stack-icons/icons/python.svg">
-</p>
-
 # 📂 Project Setup
 
 ## Requirements
 
-- Python
-- Poetry
 - Node JS
-- Yarn
+- Pnpm
 
 ## Install
 
 ```bash
-$ poetry install --no-root
-
-# OPTIONAL: Only for tailwind compiler
-$ yarn
+$ pnpm i
 ```
 
 ## Development
 
 ```bash
-$ poetry run python src/manage.py runserver
-
-# OPTIONAL: Only for tailwind compiler
-$ yarn run dev
+$ pnpm run dev
 ```
 
 # 📷 Preview
 
-<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-1.png">
-<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-2.png">
-<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-3.png">
-<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-4.png">
-<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-5.png">
-<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-6.png">
-<img src="https://raw.githubusercontent.com/devlotfi/e-clinic/main/github-assets/preview-7.png">
+<img src="https://raw.githubusercontent.com/devlotfi/game-theory-solver/main/github-assets/preview-1.png">
+<img src="https://raw.githubusercontent.com/devlotfi/game-theory-solver/main/github-assets/preview-2.png">
+<img src="https://raw.githubusercontent.com/devlotfi/game-theory-solver/main/github-assets/preview-3.png">
+<img src="https://raw.githubusercontent.com/devlotfi/game-theory-solver/main/github-assets/preview-4.png">
+<img src="https://raw.githubusercontent.com/devlotfi/game-theory-solver/main/github-assets/preview-5.png">
+<img src="https://raw.githubusercontent.com/devlotfi/game-theory-solver/main/github-assets/preview-6.png">
+<img src="https://raw.githubusercontent.com/devlotfi/game-theory-solver/main/github-assets/preview-7.png">
