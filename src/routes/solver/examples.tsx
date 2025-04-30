@@ -281,12 +281,12 @@ function RouteComponent() {
                     ...solverState,
                     gainsTable: [
                       [
-                        [3, 3],
-                        [0, 5],
+                        [3, -1],
+                        [-5, 5],
                       ],
                       [
-                        [5, 0],
-                        [1, 1],
+                        [1, -2],
+                        [0, 0],
                       ],
                     ],
                     player1Strategies: [
