@@ -91,7 +91,7 @@ export default function Sidebar() {
       ></div>
       <div
         className={cn(
-          "flex flex-col absolute overflow-y-auto gap-[1rem] p-[1rem] lg:static z-40 h-[calc(100dvh-4rem)] ml-[-18rem] w-[18rem] bg-content1 border-r border-divider duration-300",
+          "flex flex-col absolute overflow-y-auto p-[1rem] lg:static z-40 h-[calc(100dvh-4rem)] ml-[-18rem] w-[18rem] bg-content1 border-r border-divider duration-300",
           solverState.sidebarOpen && "ml-0"
         )}
       >
@@ -110,7 +110,7 @@ export default function Sidebar() {
             Load examples
           </Button>
         </div>
-        <Divider></Divider>
+        <Divider className="my-[1rem]"></Divider>
 
         <div className="flex items-center gap-[1rem]">
           <FontAwesomeIcon
@@ -120,75 +120,7 @@ export default function Sidebar() {
           <div className="flex text-[15pt] font-black">Utils</div>
         </div>
 
-        <div className="flex flex-col gap-[2rem] mt-[1rem]">
-          <PlayerUtils playerName={solverState.player1Name}>
-            <SecurityLevelDisplay
-              player={Players.PLAYER_1}
-            ></SecurityLevelDisplay>
-            <SidebarBtn
-              icon={faSearch}
-              onPress={() =>
-                setSolverState(
-                  SolverUtils.findStrictlyDominantStrategy(
-                    solverState,
-                    pyodide,
-                    Players.PLAYER_1
-                  )
-                )
-              }
-            >
-              Find Strictly Dominant Strategies
-            </SidebarBtn>
-            <SidebarBtn
-              icon={faEraser}
-              onPress={() =>
-                setSolverState(
-                  SolverUtils.eliminateStrictlyDominatedStrategy(
-                    solverState,
-                    pyodide,
-                    Players.PLAYER_1
-                  )
-                )
-              }
-            >
-              Eliminate Strictly Dominated Strategy
-            </SidebarBtn>
-          </PlayerUtils>
-
-          <PlayerUtils playerName={solverState.player2Name}>
-            <SecurityLevelDisplay
-              player={Players.PLAYER_2}
-            ></SecurityLevelDisplay>
-            <SidebarBtn
-              icon={faSearch}
-              onPress={() =>
-                setSolverState(
-                  SolverUtils.findStrictlyDominantStrategy(
-                    solverState,
-                    pyodide,
-                    Players.PLAYER_2
-                  )
-                )
-              }
-            >
-              Find Strictly Dominant Strategies
-            </SidebarBtn>
-            <SidebarBtn
-              icon={faEraser}
-              onPress={() =>
-                setSolverState(
-                  SolverUtils.eliminateStrictlyDominatedStrategy(
-                    solverState,
-                    pyodide,
-                    Players.PLAYER_2
-                  )
-                )
-              }
-            >
-              Eliminate Strictly Dominated Strategy
-            </SidebarBtn>
-          </PlayerUtils>
-
+        <div className="flex flex-col gap-[1.5rem] mt-[1rem]">
           <div className="flex flex-col gap-[0.3rem]">
             <SidebarBtn
               icon={faSearch}
@@ -211,6 +143,132 @@ export default function Sidebar() {
               Find Pareto Optimum
             </SidebarBtn>
           </div>
+
+          <PlayerUtils playerName={solverState.player1Name}>
+            <SecurityLevelDisplay
+              player={Players.PLAYER_1}
+            ></SecurityLevelDisplay>
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findStrictlyDominantStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_1
+                  )
+                )
+              }
+            >
+              Find Strictly Dominant Strategies
+            </SidebarBtn>
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findWeaklyDominantStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_1
+                  )
+                )
+              }
+            >
+              Find Weakly Dominant Strategies
+            </SidebarBtn>
+
+            <SidebarBtn
+              icon={faEraser}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.eliminateStrictlyDominatedStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_1
+                  )
+                )
+              }
+            >
+              Eliminate Strictly Dominated Strategy
+            </SidebarBtn>
+            <SidebarBtn
+              icon={faEraser}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.eliminateWeaklyDominatedStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_1
+                  )
+                )
+              }
+            >
+              Eliminate Weakly Dominated Strategy
+            </SidebarBtn>
+          </PlayerUtils>
+
+          <PlayerUtils playerName={solverState.player2Name}>
+            <SecurityLevelDisplay
+              player={Players.PLAYER_2}
+            ></SecurityLevelDisplay>
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findStrictlyDominantStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_2
+                  )
+                )
+              }
+            >
+              Find Strictly Dominant Strategies
+            </SidebarBtn>
+            <SidebarBtn
+              icon={faSearch}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.findWeaklyDominantStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_2
+                  )
+                )
+              }
+            >
+              Find Weakly Dominant Strategies
+            </SidebarBtn>
+
+            <SidebarBtn
+              icon={faEraser}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.eliminateStrictlyDominatedStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_2
+                  )
+                )
+              }
+            >
+              Eliminate Strictly Dominated Strategy
+            </SidebarBtn>
+            <SidebarBtn
+              icon={faEraser}
+              onPress={() =>
+                setSolverState(
+                  SolverUtils.eliminateWeaklyDominatedStrategy(
+                    solverState,
+                    pyodide,
+                    Players.PLAYER_2
+                  )
+                )
+              }
+            >
+              Eliminate Weakly Dominated Strategy
+            </SidebarBtn>
+          </PlayerUtils>
         </div>
       </div>
     </>

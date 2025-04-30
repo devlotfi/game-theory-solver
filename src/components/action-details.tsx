@@ -104,7 +104,7 @@ export default function ActionDetails() {
       ) : action.actionType === Actions.ELIMINATE_WEAKLY_DOMINATED_STRATEGY ? (
         <>
           <div className="flex text-primary-foreground font-bold">
-            Showing weakly dominant strategies for (
+            Eliminate weakly dominated strategy for (
             {action.player === Players.PLAYER_1
               ? solverState.player1Name
               : solverState.player2Name}

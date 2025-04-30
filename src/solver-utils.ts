@@ -225,18 +225,59 @@ export class SolverUtils {
     };
   }
 
+  public static findWeaklyDominantStrategy(
+    solverState: SolverState,
+    pyodide: PyodideInterface,
+    player: Players
+  ): SolverState {
+    const trouver_strategie_faiblement_dominante = pyodide.globals.get(
+      "trouver_strategie_faiblement_dominante"
+    );
+    const result: number | undefined = trouver_strategie_faiblement_dominante(
+      solverState.gainsTable,
+      player === Players.PLAYER_1 ? 0 : 1
+    );
+    console.log(result);
+
+    if (result === undefined)
+      return {
+        ...solverState,
+        action: {
+          actionType: Actions.WEAKLY_DOMINANT_STRATEGIES,
+          player,
+        },
+      };
+
+    return {
+      ...solverState,
+      action: {
+        actionType: Actions.WEAKLY_DOMINANT_STRATEGIES,
+        player,
+      },
+      highlightedPlayer1Strategies:
+        player === Players.PLAYER_1
+          ? new Set([solverState.player1Strategies[result].id])
+          : solverState.highlightedPlayer1Strategies,
+      highlightedPlayer2Strategies:
+        player === Players.PLAYER_2
+          ? new Set([solverState.player2Strategies[result].id])
+          : solverState.highlightedPlayer2Strategies,
+    };
+  }
+
   public static eliminateStrictlyDominatedStrategy(
     solverState: SolverState,
     pyodide: PyodideInterface,
     player: Players
   ): SolverState {
-    const trouver_premiere_dominance_stricte = pyodide.globals.get(
-      "trouver_premiere_dominance_stricte"
+    const trouver_premiere_strategie_strictement_dominee = pyodide.globals.get(
+      "trouver_premiere_strategie_strictement_dominee"
     );
-    const result: number | undefined = trouver_premiere_dominance_stricte(
-      solverState.gainsTable,
-      player === Players.PLAYER_1 ? 0 : 1
-    );
+    const result: number | undefined =
+      trouver_premiere_strategie_strictement_dominee(
+        solverState.gainsTable,
+        player === Players.PLAYER_1 ? 0 : 1
+      );
     console.log(result);
 
     if (result === undefined)
@@ -253,6 +294,56 @@ export class SolverUtils {
       ...solverState,
       action: {
         actionType: Actions.ELIMINATE_STRICTLY_DOMINATED_STRATEGY,
+        player,
+      },
+      highlightedPlayer1Strategies:
+        player === Players.PLAYER_1
+          ? new Set(
+              strategyArray.map(
+                (index) => solverState.player1Strategies[index].id
+              )
+            )
+          : solverState.highlightedPlayer1Strategies,
+      highlightedPlayer2Strategies:
+        player === Players.PLAYER_2
+          ? new Set(
+              strategyArray.map(
+                (index) => solverState.player2Strategies[index].id
+              )
+            )
+          : solverState.highlightedPlayer2Strategies,
+    };
+  }
+
+  public static eliminateWeaklyDominatedStrategy(
+    solverState: SolverState,
+    pyodide: PyodideInterface,
+    player: Players
+  ): SolverState {
+    const trouver_premiere_strategie_faiblement_dominee = pyodide.globals.get(
+      "trouver_premiere_strategie_faiblement_dominee"
+    );
+    const result: number | undefined =
+      trouver_premiere_strategie_faiblement_dominee(
+        solverState.gainsTable,
+        player === Players.PLAYER_1 ? 0 : 1
+      );
+    console.log(result);
+
+    if (result === undefined)
+      return {
+        ...solverState,
+        action: {
+          actionType: Actions.ELIMINATE_WEAKLY_DOMINATED_STRATEGY,
+          player,
+        },
+      };
+    const strategyArray = [result];
+
+    return {
+      ...solverState,
+      action: {
+        actionType: Actions.ELIMINATE_WEAKLY_DOMINATED_STRATEGY,
         player,
       },
       highlightedPlayer1Strategies:
