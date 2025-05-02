@@ -58,7 +58,7 @@ function RouteComponent() {
                 className="text-primary text-[25pt]"
               ></FontAwesomeIcon>
               <div className="flex text-[20pt] font-black">
-                Exmples used in networking
+                Examples used in networking
               </div>
             </div>
           </div>
