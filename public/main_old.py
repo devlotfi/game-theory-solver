@@ -5,42 +5,34 @@ def trouver_strategie_strictement_dominante(
     table_gains: list[list[tuple[int, int]]], joueur: Literal[0, 1]
 ) -> int | None:
     nb_strategies = len(table_gains) if joueur == 0 else len(table_gains[0])
-    nb_strategies_adversaire = len(table_gains[0]) if joueur == 0 else len(table_gains)
 
-    meilleures_strategies = []
+    for index_strategie in range(nb_strategies):
+        strictement_dominante = True
+        for autre_strategie in range(nb_strategies):
+            if index_strategie == autre_strategie:
+                continue
+            for index_strategie_autre in range(
+                len(table_gains[0]) if joueur == 0 else len(table_gains)
+            ):
+                gain_courant = (
+                    table_gains[index_strategie][index_strategie_autre][joueur]
+                    if joueur == 0
+                    else table_gains[index_strategie_autre][index_strategie][joueur]
+                )
+                gain_autre = (
+                    table_gains[autre_strategie][index_strategie_autre][joueur]
+                    if joueur == 0
+                    else table_gains[index_strategie_autre][autre_strategie][joueur]
+                )
+                if gain_courant <= gain_autre:
+                    strictement_dominante = False
+                    break
+            if not strictement_dominante:
+                break
+        if strictement_dominante:
+            return index_strategie  # Retourne l'index de la stratégie strictement dominante
 
-    for strat_adv in range(nb_strategies_adversaire):
-        meilleur_gain = float("-inf")
-        meilleure_strategie = None
-        egalite = False
-
-        for strat_joueur in range(nb_strategies):
-            gain = (
-                table_gains[strat_joueur][strat_adv][joueur]
-                if joueur == 0
-                else table_gains[strat_adv][strat_joueur][joueur]
-            )
-
-            if gain > meilleur_gain:
-                meilleur_gain = gain
-                meilleure_strategie = strat_joueur
-                egalite = False
-            elif gain == meilleur_gain:
-                egalite = True
-
-        if egalite:
-            meilleures_strategies.append(None)  # Pas de stratégie strictement meilleure
-        else:
-            meilleures_strategies.append(meilleure_strategie)
-
-    # Vérifier s’il y a une seule stratégie strictement meilleure pour tous les cas
-    candidats = [s for s in meilleures_strategies if s is not None]
-    if len(candidats) == nb_strategies_adversaire and all(
-        s == candidats[0] for s in candidats
-    ):
-        return candidats[0]
-
-    return None
+    return None  # Aucune stratégie strictement dominante trouvée
 
 
 def trouver_strategie_faiblement_dominante(
@@ -49,32 +41,37 @@ def trouver_strategie_faiblement_dominante(
     nb_strategies = len(table_gains) if joueur == 0 else len(table_gains[0])
     nb_strategies_adversaire = len(table_gains[0]) if joueur == 0 else len(table_gains)
 
-    meilleures_strategies = []
+    for s1 in range(nb_strategies):
+        est_faiblement_dominante = True
+        strictement_superieure_quelque_part = False
 
-    for strat_adv in range(nb_strategies_adversaire):
-        meilleur_gain = float("-inf")
-        strategies_meilleures = []
+        for s2 in range(nb_strategies):
+            if s1 == s2:
+                continue
 
-        for strat_joueur in range(nb_strategies):
-            gain = (
-                table_gains[strat_joueur][strat_adv][joueur]
-                if joueur == 0
-                else table_gains[strat_adv][strat_joueur][joueur]
-            )
+            for adversaire_strat in range(nb_strategies_adversaire):
+                gain_s1 = (
+                    table_gains[s1][adversaire_strat][joueur]
+                    if joueur == 0
+                    else table_gains[adversaire_strat][s1][joueur]
+                )
+                gain_s2 = (
+                    table_gains[s2][adversaire_strat][joueur]
+                    if joueur == 0
+                    else table_gains[adversaire_strat][s2][joueur]
+                )
 
-            if gain > meilleur_gain:
-                meilleur_gain = gain
-                strategies_meilleures = [strat_joueur]
-            elif gain == meilleur_gain:
-                strategies_meilleures.append(strat_joueur)
+                if gain_s1 < gain_s2:
+                    est_faiblement_dominante = False
+                    break
+                elif gain_s1 > gain_s2:
+                    strictement_superieure_quelque_part = True
 
-        meilleures_strategies.append(set(strategies_meilleures))
+            if not est_faiblement_dominante:
+                break
 
-    # Intersect all sets to find strategies that are best in every case
-    intersection = set.intersection(*meilleures_strategies)
-
-    if len(intersection) == 1:
-        return next(iter(intersection))
+        if est_faiblement_dominante and strictement_superieure_quelque_part:
+            return s1
 
     return None
 
